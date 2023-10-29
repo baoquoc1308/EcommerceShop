@@ -102,7 +102,7 @@ function Navbar(props) {
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "contact" ? "border-b-4" : ""}`}>Contact </li>
             </NavLink>
             <NavLink to="/sale-off" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "sale-off" ? "border-b-4" : ""}`}>Sale Off </li>
+              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "sale-off" ? "border-b-4" : ""}`}>Sale </li>
             </NavLink>
             <NavLink to="/Policy" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "policy" ? "border-b-4" : ""}`}>Policy </li>
@@ -137,7 +137,6 @@ function Navbar(props) {
             </NavLink>
           </li>
 
-
           <li className="mx-2 mt-2 cursor-pointer" onClick={props.toggleMode}>
             {props.mode === "dark" ? (
               <BsSun size={25} />
@@ -171,7 +170,7 @@ function Navbar(props) {
             <li onClick={responsiveMenu}>Contact </li>
           </NavLink>
           <NavLink to="/sale-off" className="ml-auto font-semibold text-xl"> {/* Thêm liên kết đến trang "Sale Off" */}
-            <li onClick={responsiveMenu}>Sale Off </li>
+            <li onClick={responsiveMenu}>Sale </li>
           </NavLink>
           <NavLink to="/policy" className="mx-6">
             <li className="hover:border-b-4 border-orange-300">Policy </li>
@@ -180,14 +179,13 @@ function Navbar(props) {
             <li className="hover:border-b-4 border-orange-300">Introduce </li>
           </NavLink>
         </ul>
-        {/* {showScrollToTopButton && (
+        {showScrollToTopButton && (
           <div
             className={`scroll-to-top-button ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`}
             onClick={scrollToTop}
           >
-            Scroll To Top
           </div>
-        )} */}
+        )}
       </nav>
     </div>
   );

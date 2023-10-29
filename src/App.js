@@ -2,11 +2,7 @@ import Products from './components/Products';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
 import ProductDetails from './components/ProductDetails';
-import {
-  Routes,
-  Route
-  
-} from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Cart from './components/Cart';
 import { CartProvider} from "react-use-cart";
 import Footer from './components/Footer';
@@ -14,6 +10,7 @@ import SlideShow from './components/Slide';
 import Collection from './components/Collection';
 import Login from './components/login';
 import Checkout from './components/Checkout';
+import CheckoutForm from './components/CheckoutForm';
 
 function App() {
   
@@ -51,6 +48,7 @@ function App() {
      <Route  path="/collection" element={<Collection mode={Mode} myFun={setshowSlide}/>}/>
      <Route  path="/login" element={<Login mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
      <Route  path="/checkout" element={<Checkout mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
+     <Route  path="/checkoutform" element={<CheckoutForm mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
      </Routes>
       
      

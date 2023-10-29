@@ -133,7 +133,7 @@ function Cart(props) {
           </div>
         </div>
         <div className="flex mx-5 my-5">
-          <Link to="/checkout" className="w-full">
+          <Link to="/checkoutform" className="w-full">
           <button className="bg-black p-2 w-full rounded-2xl text-white mx-auto hover:scale-95" onClick={clearCart}>
             Checkout
           </button>

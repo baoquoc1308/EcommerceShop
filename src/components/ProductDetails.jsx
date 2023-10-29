@@ -5,8 +5,6 @@ import { fetchApi } from '../api/api';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-
-
 function ProductDetails(props) {
 
   props.myFun(false)
@@ -14,14 +12,6 @@ function ProductDetails(props) {
   const [products, setProducts] = useState([]);
   const { addItem } = useCart();
 
-
-  // const updateItems = async () => {
-  //   const url = `https://fakestoreapi.com/products/${from}`;
-  //   let data = await fetch(url);
-  //   let parseData = await data.json();
-
-  //   setItems(parseData);
-  // };
   const handleResponseGetProductDetails = (data) => {
     setProducts(data);
   }
@@ -34,7 +24,6 @@ function ProductDetails(props) {
 
   const handleGetProductDetails = () => {
     fetchApi("GET", 'https://dummyjson.com', `products/${from}`, handleResponseGetProductDetails, handleError)
-
   };
   const handleAddToCart = () => {
     addItem(products); 
@@ -44,6 +33,7 @@ function ProductDetails(props) {
     });
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     handleGetProductDetails();
   }, []);
 
