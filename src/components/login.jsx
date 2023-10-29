@@ -8,6 +8,7 @@ function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [display, setDisplay] = useState('hidden');
+  const [loginSucessfully, setLoginSucessfully] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ function Login(props) {
 
   const handleLogin = () => {
     fetchApi("POST", 'https://dummyjson.com/auth', "login", handleResponseLogin, handleError, { username:email, password: password })
+    setLoginSucessfully(true)
   }
 
 const register = () => {

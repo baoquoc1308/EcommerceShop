@@ -12,6 +12,7 @@ import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import logo from "./images/logo.png";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import AvatarDropdown from "./TopNavigation/AccountMenu";
 
 
 function Navbar(props) {
@@ -52,6 +53,8 @@ function Navbar(props) {
   const splitLocation = pathname.split("/");
 
   const { totalUniqueItems } = useCart();
+  const token = localStorage.getItem("accessToken")
+  console.log("🚀 ~ file: Navbar.jsx:56 ~ Navbar ~ token:", token)
 
   const [Icon, setIcon] = useState(<AiOutlineMenu size={25} />);
   const [Margin, setMargin] = useState("-mt-40");
@@ -95,19 +98,16 @@ function Navbar(props) {
             <NavLink to="/collection" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "collection" ? "border-b-4" : ""} `}>Collection </li>
             </NavLink>
-            <NavLink to="/login" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>Login </li>
-            </NavLink>
-            <NavLink to="/contact" className="mx-6"> {/* Thêm liên kết đến trang "Contact" */}
+            <NavLink to="/contact" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "contact" ? "border-b-4" : ""}`}>Contact </li>
             </NavLink>
             <NavLink to="/sale-off" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "sale-off" ? "border-b-4" : ""}`}>Sale </li>
             </NavLink>
-            <NavLink to="/Policy" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
+            <NavLink to="/Policy" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "policy" ? "border-b-4" : ""}`}>Policy </li>
             </NavLink>
-            <NavLink to="/Introduce" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
+            <NavLink to="/Introduce" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "introduce" ? "border-b-4" : ""}`}>Introduce </li>
             </NavLink>
 
@@ -150,6 +150,17 @@ function Navbar(props) {
           >
             {Icon}
           </li>
+            {!token ?
+              <NavLink to="/login" className="mx-6">
+                <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>Login </li>
+              </NavLink>
+            :
+              <>
+                <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>
+                  <AvatarDropdown />
+                </li>
+              </>
+            }
         </ul>
 
 
@@ -166,7 +177,7 @@ function Navbar(props) {
           <NavLink to="/login" className="ml-auto font-semibold text-xl">
             <li onClick={responsiveMenu}>Login </li>
           </NavLink>
-          <NavLink to="/contact" className="ml-auto font-semibold text-xl"> {/* Thêm liên kết đến trang "Contact" */}
+          <NavLink to="/contact" className="ml-auto font-semibold text-xl">
             <li onClick={responsiveMenu}>Contact </li>
           </NavLink>
           <NavLink to="/sale-off" className="ml-auto font-semibold text-xl"> {/* Thêm liên kết đến trang "Sale Off" */}
