@@ -23,7 +23,6 @@ const CheckoutForm = () => {
 
   return (
     <div className="checkout-form">
-      <h2>Checkout</h2>
         <Form
           form={form}
           name="login-form"
