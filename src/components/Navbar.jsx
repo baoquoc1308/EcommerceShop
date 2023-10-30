@@ -54,7 +54,6 @@ function Navbar(props) {
 
   const { totalUniqueItems } = useCart();
   const token = localStorage.getItem("accessToken")
-  console.log("🚀 ~ file: Navbar.jsx:56 ~ Navbar ~ token:", token)
 
   const [Icon, setIcon] = useState(<AiOutlineMenu size={25} />);
   const [Margin, setMargin] = useState("-mt-40");
@@ -109,6 +108,9 @@ function Navbar(props) {
             </NavLink>
             <NavLink to="/Introduce" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "introduce" ? "border-b-4" : ""}`}>Introduce </li>
+            </NavLink>
+            <NavLink to="/checkout" className="mx-6">
+              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "contact" ? "border-b-4" : ""}`}>Order </li>
             </NavLink>
 
             <div className="ml-auto mx-6 mt-2 flex items-center relative cursor-pointer">

@@ -1,77 +1,93 @@
 import React, { useState } from "react";
 import './CheckoutForm.css'
+import { Button, Input } from "antd";
+import { Form } from 'antd';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useNavigate } from "react-router-dom";
 
-function CheckoutForm({ handleCheckout, handleCancel }) {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    address: "",
-    phone: "",
-    notes: "",
-  });
+const CheckoutForm = () => {
+  const [form] = Form.useForm()
+  const navigate = useNavigate();
+  const handleOnFinish = (values) => {
+    localStorage.setItem('infoOrder', JSON.stringify(values))
+    toast.success('Mua hàng thành công!', {
+      position: "top-right",
+      autoClose: 1500,
+    })
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    setTimeout(() => {
+      navigate('/checkout')
+    }, 1500);
+  }
 
   return (
     <div className="checkout-form">
       <h2>Checkout</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="fullName">Full Name</label>
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
+        <Form
+          form={form}
+          name="login-form"
+          onFinish={handleOnFinish}
+        >
+        <p className="form-title">THÔNG TIN KHÁCH HÀNG</p>
+        <Form.Item
+          label="Full Name"
+          name="fullname"
+          rules={[{ required: true, message: 'Please input your fullname!' }]}
+        >
+          <Input
+            placeholder="Fullname"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name="Email"
+          rules={[{ required: true, message: 'Please input your Email!' }]}
+        >
+          <Input
+            placeholder="Email"
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
+        </Form.Item>
+        <Form.Item
+          label="Address"
+          name="Address"
+          rules={[{ required: true, message: 'Please input your Address!' }]}
+        >
+          <Input
+            placeholder="Address"
           />
+        </Form.Item>
+        <Form.Item
+          label="Phone number"
+          name="phone"
+          rules={[
+            { required: true, message: "Please enter your phone number!" },
+            // { validator: isValidPhoneNumber || "" }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Notes"
+          name="Notes"
+          rules={[
+            {
+              required: true,
+              message: "Please input Notes!"
+            }
+          ]}
+        >
+          <Input placeholder="Please input Notes" />
+        </Form.Item>
+        <div className="address-company">
+          {/* <FilterLocation /> */}
         </div>
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="notes">Notes</label>
-          <textarea
-            name="notes"
-            value={formData.notes}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-actions">
-          <button type="button" onClick={handleCancel}>
-            Cancel
-          </button>
-          <button type="button" onClick={() => handleCheckout(formData)}>
-            Confirm Order
-          </button>
-        </div>
-      </form>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" className="login-form-button">
+            MUA HÀNG
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }
