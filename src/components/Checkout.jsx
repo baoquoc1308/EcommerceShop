@@ -5,7 +5,8 @@ import { Space, Table, Tag } from 'antd';
 const Checkout = (props) => {
   // const infoOrder = localStorage.getItem("infoOrder")
   const dataJSON = localStorage.getItem('order')
-  const dataOrder = JSON.parse(dataJSON)
+  console.log("🚀 ~ file: Checkout.jsx:8 ~ Checkout ~ dataJSON:", dataJSON)
+  const dataOrder = dataJSON ? JSON.parse(dataJSON) : [];
   const [order, setOrder] = useState([])
   const mergedArray = [...dataOrder, ...order];
   const [listOrder, setListOrder] = useState(mergedArray)

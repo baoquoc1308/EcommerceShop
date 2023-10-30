@@ -15,6 +15,7 @@ const AvatarDropdown = () => {
   const handleResponseLogout = () => {
     if (accessToken) {
       localStorage.removeItem("accessToken")
+      localStorage.removeItem("order")
       toast.success("Logged out successfully!", {
         position: "top-right",
       })
