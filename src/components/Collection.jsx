@@ -44,7 +44,6 @@ function Collection(props) {
   props.myFun(false);
 
   return (
-
     <div className=' my-20'>
 
       <ScrollAnimation animateIn="fadeIn" initiallyVisible={true} >

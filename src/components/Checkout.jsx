@@ -1,19 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import checkout from './images/Checkout.jpg'
+import { Space, Table, Tag } from 'antd';
 
+const Checkout = (props) => {
+  // const infoOrder = localStorage.getItem("infoOrder")
+  const dataJSON = localStorage.getItem('order')
+  console.log("🚀 ~ file: Checkout.jsx:8 ~ Checkout ~ dataJSON:", dataJSON)
+  const dataOrder = dataJSON ? JSON.parse(dataJSON) : [];
+  const [order, setOrder] = useState([])
+  const mergedArray = [...dataOrder, ...order];
+  const [listOrder, setListOrder] = useState(mergedArray)
+  const handleClickDelete = (id) => {
+    const updatedData = mergedArray.filter(item => item.id !== id);
+    setListOrder( updatedData)
+  }
 
+  const columns = [
+    {
+      title: 'Tên SP',
+      dataIndex: 'title',
+      key: 'title',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Số lượng',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Giá',
+      dataIndex: 'price',
+      key: 'price',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Đánh giá',
+      dataIndex: 'rating',
+      key: 'rating',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <button onClick={()=> handleClickDelete(record?.id)}>Delete</button>
+          </Space>
+        )
+      }
+    },
+  ];
+  
 
-function Checkout(props) {
+  useEffect(() => {
+    setOrder(dataOrder, ...dataOrder)
+  },[])
 
-    props.myFun(false);
-    props.myFun2(false);
+  props.myFun(false);
+  props.myFun2(false);
   return (
 
     <div className='my-40 lg:my-32 mx-7 '>
-        <h1 className='hidden lg:inline-block absolute mt-2 font-sans text-2xl mx-4 bg-white z-0 p-2 shadow-lg rounded-md'>Congratulations Your Order will be delivered within 5-6 business days</h1>
-      <img src={checkout} alt="" className='lg:hidden w-full rounded-xl'/>
-      <img src={checkout} alt="" className='hidden lg:inline-block w-full rounded-xl ' style={{height:470}}/>
-      <h1 className={`text-2xl my-4 font-sans font-semibold lg:hidden ${props.mode==='dark'?"text-white":"text-black"}`}>Congratulations Your Order will be delivered within 5-6 business days</h1>
+      <h1>ĐƠN HÀNG</h1>
+      <Table columns={columns} dataSource={mergedArray} />;
     </div>
 
   )

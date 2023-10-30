@@ -1,0 +1,75 @@
+$white: #fff;
+$black: #000;
+$space: #4f5a60;
+$black100: #040505;
+$pepper: #818a91;
+$grey100: #f3f6f7;
+$grey200: #e7ecef;
+$grey300: #ced5dc;
+$grey400: #bec8ce;
+$grey500: #bfc9cf;
+$grey600: #f0f0f0;
+$grey700: #fafafa;
+$teal: #00b0b2;
+$dark-teal: #158693;
+$lettuce: #48dcc0;
+$red: #e54545;
+$yellow: #ffd049;
+$blue: #3384e1;
+$orange: #ff9d5a;
+$orange2: #ff8b00;
+$neutral-dark: #666e76;
+$white-grey: #fafdff;
+$brown: #81716b;
+$black-button: #121212;
+
+$nav-link-color: #666666;
+$bg-color: #F3F5F4;
+$navbar-color: #FFFFFF;
+$border-gray: #E0E0E0;
+$hover-gray: #F5F5F5;
+$active-gray: #EBEBEB;
+
+$at-blue-light: #00AFE9;
+$at-blue-dark: #006AB8;
+
+$red: #F44336;
+
+$border-box-shadow: rgba(0, 0, 0, 0.04);
+$border-box-shadow2: rgba(34, 41, 48, 0.12);
+
+// eslint-disable-next-line
+:export {
+  white: $white;
+  black: $black;
+  space: $space;
+  pepper: $pepper;
+  grey100: $grey100;
+  grey200: $grey200;
+  grey300: $grey300;
+  grey400: $grey400;
+  grey500: $grey500;
+  teal: $teal;
+  dark-teal: $dark-teal;
+  lettuce: $lettuce;
+  red: $red;
+  yellow: $yellow;
+  blue: $blue;
+  orange: $orange;
+  orange2: $orange2;
+  neutral-dark: $neutral-dark;
+  border-box-shadow: $border-box-shadow;
+  border-box-shadow2: $border-box-shadow2;
+  white-grey: $white-grey;
+  brown: $brown;
+  black-button: $black-button;
+  black100: $black100;
+  grey600: $grey600;
+  grey700: $grey700;
+  nav-link-color: $nav-link-color;
+  bg-color: $bg-color;
+  navbar-color: $navbar-color;
+  border-gray: $border-gray;
+  hover-gray: $hover-gray;
+  active-gray: $active-gray;
+}
