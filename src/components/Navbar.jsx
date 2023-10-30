@@ -121,7 +121,7 @@ function Navbar(props) {
                 onChange={handleInputChange}
                 className={`border border-gray-300 p-1 rounded-md pl-10 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`}
               />
-              <AiOutlineSearch className="absolute left-3 top-2 text-gray-500" />
+              <AiOutlineSearch className="absolute left-3 top-2 text-gray-500" style={{position: "absolute", left: "5px", top: "50%", transform: "translateY(-50%)"}}/>
               <button
                 onClick={handleSearch}
                 className={`ml-2 text-gray-500 hover:text-gray-700 cursor-pointer ${props.mode === "dark" ? "text-white" : ""}`}

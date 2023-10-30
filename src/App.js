@@ -11,6 +11,7 @@ import Collection from './components/Collection';
 import Login from './components/login';
 import Checkout from './components/Checkout';
 import CheckoutForm from './components/CheckoutForm';
+import Contact from './components/Contact';
 
 function App() {
   
@@ -49,6 +50,7 @@ function App() {
      <Route  path="/login" element={<Login mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
      <Route  path="/checkout" element={<Checkout mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
      <Route  path="/checkoutform" element={<CheckoutForm mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
+     <Route  path="/contact" element={<Contact mode={Mode} myFun={setshowSlide} myFun2={setshowFooter}/>}/>
      </Routes>
       
      
