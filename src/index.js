@@ -17,7 +17,7 @@ root.render(
       <App />
     <ToastContainer position="top-center" autoClose={3000} />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function

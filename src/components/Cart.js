@@ -3,6 +3,7 @@ import { useCart } from "react-use-cart";
 import { AiOutlinePlus, AiOutlineMinus,AiOutlineDelete } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import cart from "./images/cart.png";
+import "./Cart.css"
 
 const Cart = (props) => {
   props.myFun(false);

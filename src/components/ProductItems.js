@@ -6,12 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import ScrollAnimation from 'react-animate-on-scroll';
 
 
-const Msg = () => (
-  <div className=' text-center'>
-     <h1 className='text-lg font-bold'>Added To Cart</h1>
-   <Link to="/cart"><button className='my-2 bg-black text-white p-2 rounded-md '>Go to Cart</button></Link> 
-  </div>
-)
+// const Msg = () => (
+//   <div className=' text-center'>
+//      {/* <h1 className='text-lg font-bold'>Added To Cart</h1> */}
+//    <Link to="/cart"><button className='my-2 bg-black text-white p-2 rounded-md '>Go to Cart</button></Link> 
+//   </div>
+// )
 
 function ProductItems(props) {
   <ToastContainer
@@ -32,8 +32,8 @@ function ProductItems(props) {
   const notify = () => {
     //toast("Default Notification !");
 
-    toast(<Msg/>, {
-      position: toast.POSITION.BOTTOM_CENTER
+    toast('Product added to cart', {
+      position: toast.POSITION.TOP_RIGHT,
     });
   }
   
