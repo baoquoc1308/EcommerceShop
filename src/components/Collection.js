@@ -41,7 +41,7 @@ function Collection(props) {
     fetchApi("GET", 'https://dummyjson.com', `products/category/${collection}`, handleResponseGetCategoryProducts, handleError)
   }
 
-  props.myFun(false);
+  // props.myFun(false);
 
   return (
     <div className=' my-20'>

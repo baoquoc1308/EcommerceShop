@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function ProductDetails(props) {
 
-  props.myFun(false)
+  // props.myFun(false)
 
   const [products, setProducts] = useState([]);
   const { addItem } = useCart();

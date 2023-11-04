@@ -1,41 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Space, Table, Avatar } from 'antd';
+import { Space, Table, Avatar, Modal } from 'antd';
+import { QuestionCircleTwoTone } from '@ant-design/icons';
 import "./Checkout.css"
 
 const Checkout = (props) => {
   const dataJSON = localStorage.getItem('order');
   const dataOrder = dataJSON ? JSON.parse(dataJSON) : [];
   const [order, setOrder] = useState(dataOrder);
-
-  const handleAddToCart = (product) => {
-    const productIndex = order.findIndex((item) => item.id === product.id);
-    if (productIndex !== -1) {
-      // Nếu sản phẩm đã tồn tại, cộng dồn số lượng
-      const updatedOrder = [...order];
-      updatedOrder[productIndex].quantity += 1;
-      setOrder(updatedOrder);
-    } else {
-      // Nếu sản phẩm chưa tồn tại, thêm sản phẩm vào danh sách đơn hàng
-      const updatedOrder = [...order, { ...product, quantity: 1 }];
-      setOrder(updatedOrder);
-    }
-  }
-  const handleDecreaseQuantity = (product) => {
-    const productIndex = order.findIndex((item) => item.id === product.id);
-    if (productIndex !== -1) {
-      const updatedOrder = [...order];
-      if (updatedOrder[productIndex].quantity > 1) {
-        updatedOrder[productIndex].quantity -= 1;
-        setOrder(updatedOrder);
-      }
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
+  const showModal = (id) => {
+    setProductIdToDelete(id); // Store the product ID to delete
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    // Perform the delete operation here
+    if (productIdToDelete !== null) {
+      const updatedData = order.filter((item) => item.id !== productIdToDelete);
+      setOrder(updatedData);
+      localStorage.setItem('order', JSON.stringify(updatedData));
+      setIsModalVisible(false);
     }
   };
 
-  const handleClickDelete = (id) => {
-    const updatedData = order.filter((item) => item.id !== id);
-    setOrder(updatedData);
-
-    localStorage.setItem('order', JSON.stringify(updatedData));
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
   const columns = [
     {
@@ -88,10 +77,7 @@ const Checkout = (props) => {
       render: (_, record) => {
         return (
           <Space size="middle">
-            <button onClick={() => handleClickDelete(record?.id)}>Delete</button>
-            <button onClick={() => handleAddToCart(record)}>+</button>
-            <button onClick={() => handleDecreaseQuantity(record)}>-</button>
-
+            <button onClick={() => showModal(record?.id)}>Delete</button>
           </Space>
         );
       },
@@ -100,15 +86,25 @@ const Checkout = (props) => {
 
 
   useEffect(() => {
-    props.myFun(false);
+    // props.myFun(false);
     props.myFun2(false);
-    // setOrder(dataOrder, ...dataOrder)
   }, [])
 
   return (
     <div className='my-40 lg:my-32 mx-7 '>
       <h1 className="order">ĐƠN HÀNG</h1>
       <Table className="table-list" columns={columns} dataSource={order} />
+      <Modal
+      title="Delete Confirmation"
+      visible={isModalVisible}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >
+      <div className="modal-delete">
+        <QuestionCircleTwoTone className="modal-delete__icon" />
+        <p className="modal-delete__msg">Do you want to delete this item?</p>
+      </div>
+    </Modal>
     </div>
 
   );

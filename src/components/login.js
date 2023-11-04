@@ -12,7 +12,7 @@ function Login(props) {
   const navigate = useNavigate();
 
 
-  props.myFun(false);
+  // props.myFun(false);
   props.myFun2(false);
 
   const handleResponseLogin = (data) => {

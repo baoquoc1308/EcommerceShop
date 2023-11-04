@@ -77,7 +77,7 @@ function Navbar(props) {
     <div className="">
       <nav className="flex flex-col fixed  top-0  min-w-full shadow-md z-50">
         <ul
-          className={`flex flex-row p-3  z-30 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`
+          className={`flex flex-row p-2.5 z-30 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`
           }
         >
           <label htmlFor="" className="mx-3 cursor-pointer">
@@ -134,6 +134,7 @@ function Navbar(props) {
             {Icon}
           </li>
           {!token ?
+          
             <NavLink to="/login" className="mx-6">
               <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>Login </li>
             </NavLink>
@@ -148,7 +149,7 @@ function Navbar(props) {
 
 
         <ul
-          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-3 z-10 ${Margin} duration-500 sm:hidden text-lg ${props.mode === "dark" ? "text-white bg-gray-600" : "bg-gray-200"
+          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-2.5 z-10 ${Margin} duration-500 sm:hidden text-lg ${props.mode === "dark" ? "text-white bg-gray-600" : "bg-gray-200"
             }`}
         >
           <NavLink to="/" className="ml-auto font-semibold text-xl">

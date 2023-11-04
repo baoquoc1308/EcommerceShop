@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function Products(props) {
 
-  props.myFun(true);
+  // props.myFun(true);
   props.myFun2(true);
 
  const [products, setProducts] = useState([]);

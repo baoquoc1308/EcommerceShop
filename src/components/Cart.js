@@ -6,13 +6,13 @@ import cart from "./images/cart.png";
 import "./Cart.css"
 
 const Cart = (props) => {
-  props.myFun(false);
+  // props.myFun(false);
   props.myFun2(false);
 
   const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem ,emptyCart ,clearCartMetadata } =
   useCart();
   const [totalAllProduct, setTotalAllProduct] = useState(0)
-
+  
   const clearCart=()=>{
     emptyCart();
     clearCartMetadata();
