@@ -28,29 +28,29 @@ const Checkout = (props) => {
   };
   const columns = [
     {
-      title: 'Hình ảnh',
-      dataIndex: 'thumbnail',
-      key: 'thumbnail',
+      title: "Hình ảnh",
+      dataIndex: "thumbnail",
+      key: "thumbnail",
       render: (link) => {
         return <Avatar src={link} />;
       },
     },
     {
-      title: 'Tên sản phẩm',
-      dataIndex: 'title',
-      key: 'title',
+      title: "Tên sản phẩm",
+      dataIndex: "title",
+      key: "title",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Số lượng',
-      dataIndex: 'quantity',
-      key: 'quantity',
+      title: "Số lượng",
+      dataIndex: "quantity",
+      key: "quantity",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Giá',
-      dataIndex: 'price',
-      key: 'price',
+      title: "Giá",
+      dataIndex: "price",
+      key: "price",
       render: (text) => <a>{text}</a>,
     },
     {
@@ -62,18 +62,18 @@ const Checkout = (props) => {
     {
       title: "Danh mục",
       dataIndex: "category",
-      key: 'category',
+      key: "category",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Đánh giá',
-      dataIndex: 'rating',
-      key: 'rating',
+      title: "Đánh giá",
+      dataIndex: "rating",
+      key: "rating",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (_, record) => {
         return (
           <Space size="middle">
@@ -84,14 +84,13 @@ const Checkout = (props) => {
     },
   ];
 
-
   useEffect(() => {
     // props.myFun(false);
     props.myFun2(false);
   }, [])
 
   return (
-    <div className='my-40 lg:my-32 mx-7 '>
+    <div className="my-40 lg:my-32 mx-7 ">
       <h1 className="order">ĐƠN HÀNG</h1>
       <Table className="table-list" columns={columns} dataSource={order} />
       <Modal
@@ -106,8 +105,7 @@ const Checkout = (props) => {
       </div>
     </Modal>
     </div>
-
   );
 };
 
-export default Checkout
+export default Checkout;
