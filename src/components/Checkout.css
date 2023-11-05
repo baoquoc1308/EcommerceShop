@@ -1,0 +1,16 @@
+.order {
+    color: inherit;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+.table-list th, .table-list td {
+    text-align: center !important;
+}
+.modal-delete {
+    display: flex;
+    align-items: center;
+}
+.modal-delete__icon {
+    margin-right: 10px;
+}

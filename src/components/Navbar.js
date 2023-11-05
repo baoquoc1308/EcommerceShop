@@ -6,20 +6,33 @@ import {
   AiOutlineClose,
   AiOutlineShoppingCart,
   AiOutlineSearch,
-
 } from "react-icons/ai";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import logo from "./images/logo.png";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import AvatarDropdown from "./TopNavigation/AccountMenu";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import { fetchApi } from "../api/api";
 
 function Navbar(props) {
   //assigning location variable
   const location = useLocation();
+  const [products, setProducts] = useState([]);
 
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+
+  const handleResponseGetCategoryProducts = (data) => {
+    setProducts(data);
+  };
+
+  const handleError = () => {
+    toast.error("Something went wrong!", {
+      position: "top-right",
+      autoClose: 1500,
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,8 +57,6 @@ function Navbar(props) {
     });
   };
 
-
-
   //destructuring pathname from location
   const { pathname } = location;
 
@@ -53,12 +64,11 @@ function Navbar(props) {
   const splitLocation = pathname.split("/");
 
   const { totalUniqueItems } = useCart();
-  const token = localStorage.getItem("accessToken")
+  const token = localStorage.getItem("accessToken");
 
   const [Icon, setIcon] = useState(<AiOutlineMenu size={25} />);
   const [Margin, setMargin] = useState("-mt-40");
   const [searchInput, setSearchInput] = useState("");
-
 
   const responsiveMenu = () => {
     if (Margin === "-mt-40") {
@@ -71,46 +81,63 @@ function Navbar(props) {
   };
   const handleInputChange = (event) => {
     setSearchInput(event.target.value);
-  };
-
-  const handleSearch = () => {
-    if (searchInput) {
-      console.log("Performing search for:", searchInput);
-    }
+    fetchApi(
+      "GET",
+      "https://dummyjson.com",
+      `products/search?q=${event.target.value}`,
+      handleResponseGetCategoryProducts,
+      handleError
+    );
   };
 
   return (
     <div className="">
       <nav className="flex flex-col fixed  top-0  min-w-full shadow-md z-50">
         <ul
-          className={`flex flex-row p-3  z-30 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`
+          className={`flex flex-row p-2.5 z-30 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`
           }
         >
           <label htmlFor="" className="mx-3 cursor-pointer">
-            <img src={logo} alt="" className="w-10 h-9" onClick={scrollToTop}/>
+            <img src={logo} alt="" className="w-10 h-9" onClick={scrollToTop} />
           </label>
 
           <ul className="hidden  sm:flex ml-8 mt-1 text-lg">
             <NavLink to="/" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "" ? "border-b-4" : ""}`}>Home </li>
+              <li
+                className={`hover:border-b-4 border-orange-300 ${
+                  splitLocation[1] === "" ? "border-b-4" : ""
+                }`}
+              >
+                Home{" "}
+              </li>
             </NavLink>
             <NavLink to="/collection" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "collection" ? "border-b-4" : ""} `}>Collection </li>
+              <li
+                className={`hover:border-b-4 border-orange-300 active:border-b-4 ${
+                  splitLocation[1] === "collection" ? "border-b-4" : ""
+                } `}
+              >
+                Collection{" "}
+              </li>
             </NavLink>
             <NavLink to="/contact" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "contact" ? "border-b-4" : ""}`}>Contact </li>
+              <li
+                className={`hover:border-b-4 border-orange-300 ${
+                  splitLocation[1] === "contact" ? "border-b-4" : ""
+                }`}
+              >
+                Contact{" "}
+              </li>
             </NavLink>
-            <NavLink to="/sale-off" className="mx-6"> {/* Thêm liên kết đến trang "Sale Off" */}
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "sale-off" ? "border-b-4" : ""}`}>Sale </li>
-            </NavLink>
-            <NavLink to="/Policy" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "policy" ? "border-b-4" : ""}`}>Policy </li>
-            </NavLink>
-            <NavLink to="/Introduce" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "introduce" ? "border-b-4" : ""}`}>Introduce </li>
-            </NavLink>
+
             <NavLink to="/checkout" className="mx-6">
-              <li className={`hover:border-b-4 border-orange-300 ${splitLocation[1] === "contact" ? "border-b-4" : ""}`}>Order </li>
+              <li
+                className={`hover:border-b-4 border-orange-300 ${
+                  splitLocation[1] === "order" ? "border-b-4" : ""
+                }`}
+              >
+                Order{" "}
+              </li>
             </NavLink>
 
             <div className="ml-auto mx-6 mt-2 flex items-center relative cursor-pointer">
@@ -119,14 +146,13 @@ function Navbar(props) {
                 placeholder="Search"
                 value={searchInput}
                 onChange={handleInputChange}
-                className={`border border-gray-300 p-1 rounded-md pl-10 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`}
+                className={`border border-gray-300 p-1 rounded-md pl-10 ${
+                  props.mode === "dark"
+                    ? "text-white bg-gray-500"
+                    : "bg-gray-200"
+                }`}
               />
               <AiOutlineSearch className="absolute left-3 top-2 text-gray-500" />
-              <button
-                onClick={handleSearch}
-                className={`ml-2 text-gray-500 hover:text-gray-700 cursor-pointer ${props.mode === "dark" ? "text-white" : ""}`}
-              >
-              </button>
             </div>
           </ul>
 
@@ -134,7 +160,7 @@ function Navbar(props) {
             <NavLink to="/cart">
               <AiOutlineShoppingCart size={25} />
               <span className="absolute -top-2 ml-5 z-10 bg-orange-300 rounded-full px-1">
-                {totalUniqueItems}
+                {token !== null ? totalUniqueItems : 0}
               </span>
             </NavLink>
           </li>
@@ -152,22 +178,32 @@ function Navbar(props) {
           >
             {Icon}
           </li>
-            {!token ?
-              <NavLink to="/login" className="mx-6">
-                <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>Login </li>
-              </NavLink>
-            :
-              <>
-                <li className={`hover:border-b-4 border-orange-300 active:border-b-4 ${splitLocation[1] === "login" ? "border-b-4" : ""} `}>
-                  <AvatarDropdown />
-                </li>
-              </>
-            }
+          {!token ?
+          
+            <NavLink to="/login" className="mx-6">
+              <li
+                className={`hover:border-b-4 border-orange-300 active:border-b-4 ${
+                  splitLocation[1] === "login" ? "border-b-4" : ""
+                } `}
+              >
+                Login{" "}
+              </li>
+            </NavLink>
+           : (
+            <>
+              <li
+                className={`hover:border-b-4 border-orange-300 active:border-b-4 ${
+                  splitLocation[1] === "login" ? "border-b-4" : ""
+                } `}
+              >
+                <AvatarDropdown />
+              </li>
+            </>
+          )}
         </ul>
 
-
         <ul
-          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-3 z-10 ${Margin} duration-500 sm:hidden text-lg ${props.mode === "dark" ? "text-white bg-gray-600" : "bg-gray-200"
+          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-2.5 z-10 ${Margin} duration-500 sm:hidden text-lg ${props.mode === "dark" ? "text-white bg-gray-600" : "bg-gray-200"
             }`}
         >
           <NavLink to="/" className="ml-auto font-semibold text-xl">
@@ -182,22 +218,14 @@ function Navbar(props) {
           <NavLink to="/contact" className="ml-auto font-semibold text-xl">
             <li onClick={responsiveMenu}>Contact </li>
           </NavLink>
-          <NavLink to="/sale-off" className="ml-auto font-semibold text-xl"> {/* Thêm liên kết đến trang "Sale Off" */}
-            <li onClick={responsiveMenu}>Sale </li>
-          </NavLink>
-          <NavLink to="/policy" className="mx-6">
-            <li className="hover:border-b-4 border-orange-300">Policy </li>
-          </NavLink>
-          <NavLink to="/introduce" className="mx-6">
-            <li className="hover:border-b-4 border-orange-300">Introduce </li>
-          </NavLink>
         </ul>
         {showScrollToTopButton && (
           <div
-            className={`scroll-to-top-button ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`}
+            className={`scroll-to-top-button ${
+              props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"
+            }`}
             onClick={scrollToTop}
-          >
-          </div>
+          ></div>
         )}
       </nav>
     </div>

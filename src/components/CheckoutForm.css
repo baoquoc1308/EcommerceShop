@@ -1,4 +1,4 @@
-/* CSS cho form thanh toán */
+
 .checkout-form {
     width: 100%;
     max-width: 400px;
@@ -44,7 +44,7 @@
   
   button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #61a9f5;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -59,10 +59,7 @@
     display: flex;
     justify-content: space-between;
   }
-  
-  /* Định dạng cho nút Cancel và Confirm Order */
   .form-actions button {
     flex: 1;
     margin: 0 5px;
-  }
-  
+  } 

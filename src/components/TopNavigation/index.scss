@@ -16,6 +16,10 @@
   display: block;
 }
 
+.ant-avatar {
+  background: rgb(229 231 235);
+  border: 1px solid lightgrey;
+}
 
 // Login form
 .login-page {
@@ -72,7 +76,7 @@
             margin: 0 auto;
             border-radius: 20px;
             padding: 4px 20px;
-            background: #149a9f;
+            background: #4be7ec;
             color: #ffffff;
           }
         }

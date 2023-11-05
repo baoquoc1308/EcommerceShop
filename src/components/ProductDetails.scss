@@ -1,0 +1,58 @@
+.image-products {
+  max-width: 50%;
+}
+
+.discountPercentage {
+  position: absolute;
+  z-index: 1;
+
+  .number-discount {
+    display: block;
+    padding: 0.125rem 0.25rem;
+    background-color: #ffe97a;
+    border-bottom-left-radius: 0.125rem;
+
+    .percent {
+      display: block;
+      color: #ec3814;
+      font-size: .75rem;
+      line-height: .875rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.price-total {
+  padding: 0.5rem 0 0;
+  display: flex;
+  height: 1.25rem;
+  align-items: center;
+  overflow: hidden;
+  
+  .old-price {
+    text-decoration: line-through;
+    color: #3a3939;
+    .unit-price {
+      font-size: .75rem;
+      color: #3a3939;
+    }
+
+    .num-old-price {
+      font-size: 14px;
+      color: #3a3939;
+    }
+  }
+
+  .new-price {
+    margin-left: 1rem;
+    .unit-price {
+      font-size: .75rem;
+      color: #ee4d2d;
+    }
+    .num-new-price {
+      font-size: 16px;
+      color: #ee4d2d;
+    }
+
+  }
+}

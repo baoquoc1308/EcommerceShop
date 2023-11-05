@@ -1,0 +1,72 @@
+.description {
+  max-height: 3em; /* Số lượng dòng tối đa (3em có thể thay đổi tùy thuộc vào kích thước chữ) */
+  margin: 0; /* Đảm bảo không có margin dư thừa */
+  overflow: hidden; /* Ẩn phần dư thừa nếu vượt quá max-height */
+  position: relative; /* Đảm bảo position là relative */
+  &:after {
+    content: "..."; /* Thêm dấu "..." */
+    position: relative; /* Đặt vị trí là tuyệt đối */
+    bottom: 0; /* Đặt ở phía dưới */
+    right: 0; /* Đặt ở bên phải */
+    background: white; /* Đặt màu nền là trắng để che phần cuối nếu cần thiết */
+  }
+}
+
+.discountPercentage {
+  position: absolute;
+  z-index: 1;
+
+  .number-discount {
+    display: block;
+    padding: 0.125rem 0.25rem;
+    background-color: #ffe97a;
+    border-bottom-left-radius: 0.125rem;
+
+    .percent {
+      display: block;
+      color: #ec3814;
+      font-size: .75rem;
+      line-height: .875rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.price-total {
+  padding: 0.5rem 0 0;
+  display: flex;
+  height: 1.25rem;
+  align-items: center;
+  overflow: hidden;
+  
+  .old-price {
+    text-decoration: line-through;
+    color: #bdbdbd;
+    .unit-price {
+      font-size: .75rem;
+      color: #bdbdbd;
+    }
+
+    .num-old-price {
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+  }
+
+  .new-price {
+    margin-left: 1rem;
+    .unit-price {
+      font-size: .75rem;
+      color: #ee4d2d;
+    }
+    .num-new-price {
+      font-size: 16px;
+      color: #ee4d2d;
+    }
+
+  }
+}
+
+.ant-rate {
+  margin-top: 1rem;
+}
