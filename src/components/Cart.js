@@ -12,14 +12,21 @@ const Cart = (props) => {
   // props.myFun(false);
   props.myFun2(false);
 
-  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem ,emptyCart ,clearCartMetadata } =
-  useCart();
-  const [totalAllProduct, setTotalAllProduct] = useState(0)
-  
-  const clearCart=()=>{
+  const {
+    isEmpty,
+    totalUniqueItems,
+    items,
+    updateItemQuantity,
+    removeItem,
+    emptyCart,
+    clearCartMetadata,
+  } = useCart();
+  const [totalAllProduct, setTotalAllProduct] = useState(0);
+
+  const clearCart = () => {
     emptyCart();
     clearCartMetadata();
-  }
+  };
 
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
@@ -95,7 +102,6 @@ const Cart = (props) => {
     <div className="my-32 mb-60">
       <h2 className="title-product">THÔNG TIN SẢN PHẨM</h2>
       {items?.map((item) => {
-        console.log("🚀 ~ file: Cart.js:94 ~ {items?.map ~ item:", item);
         return (
           <div
             key={item.id}
