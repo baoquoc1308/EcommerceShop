@@ -1,63 +1,111 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import ProductItems from "./ProductItems";
-import Spinner from "./Spinner";
-import { fetchApi } from "../api/api";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useCart } from "react-use-cart";
+import React from 'react'
+import { useState, useEffect } from 'react'
+import ProductItems from './ProductItems'
+import Spinner from './Spinner'
+import { fetchApi } from '../api/api'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useCart } from 'react-use-cart'
+import { Select } from 'antd'
 
 function Products(props) {
+  props.myFun2(true)
 
-  // props.myFun(true);
-  props.myFun2(true);
+  const [products, setProducts] = useState([])
 
-  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false)
 
-  const [loading, setLoading] = useState(false);
+  const handleResponseGetAllProducts = data => {
+    setProducts(data)
+  }
 
-  const handleResponseGetAllProducts = (data) => {
-    setProducts(data);
-  };
-
-  const handleError = (data) => {
-    toast.error(data?.message || "Something went wrong!", {
-      position: "top-right",
+  const handleError = data => {
+    toast.error(data?.message || 'Something went wrong!', {
+      position: 'top-right',
       autoClose: 1500,
-    });
-  };
+    })
+  }
 
-  const handleGetAllDataProducts = () => {
-    setLoading(true);
+  const handleSelectProduct = searchString => {
+    setLoading(true)
     fetchApi(
-      "GET",
-      "https://dummyjson.com",
-      "products",
+      'GET',
+      'https://dummyjson.com',
+      `products/search?q=${searchString}&limit=100`,
       handleResponseGetAllProducts,
       handleError
-    );
-    setLoading(false);
-  };
+    )
+    setLoading(false)
+  }
 
   useEffect(() => {
-    handleGetAllDataProducts();
-  }, []);
+    handleSelectProduct('')
+  }, [])
 
   return (
     <div>
       <h1
-        className={`text-3xl sm:text-5xl sm:text-center border-b-4 border-orange-400 font-bold inline-block mx-4 md:mx-6 mt-20 text-center ${
-          props.mode === "dark" ? "text-white" : "text-black"
-        } `}
+        className={`text-3xl sm:text-5xl sm:text-center border-b-4 border-orange-400 font-bold inline-block mx-4 md:mx-6 mt-20 text-center `}
       >
         Featured Products
       </h1>
+      <>
+        <Select
+          showSearch
+          style={{
+            width: 200,
+          }}
+          placeholder="Search to Select"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            (option?.label ?? '').includes(input)
+          }
+          filterSort={(optionA, optionB) =>
+            (optionA?.label ?? '')
+              .toLowerCase()
+              .localeCompare((optionB?.label ?? '').toLowerCase())
+          }
+          options={[
+            {
+              value: '',
+              label: 'All products',
+            },
+            {
+              value: 'shoes',
+              label: 'Shoes',
+            },
+            {
+              value: 'watch',
+              label: 'Watch',
+            },
+            {
+              value: 'womens',
+              label: 'Womens',
+            },
+            {
+              value: 'man',
+              label: 'Man',
+            },
+            {
+              value: '5',
+              label: 'Resolved',
+            },
+            {
+              value: '6',
+              label: 'Cancelled',
+            },
+          ]}
+          // 'https://dummyjson.com/products/search?q=phone'
+          // ``
+          onChange={e => handleSelectProduct(e)}
+        />
+      </>
 
       {loading ? (
         <Spinner />
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-y-14 gap-x-4 my-14 md:my-20 sm:mx-7 -z-10 mx-4">
-          {products?.products?.map((element) => {
+          {products?.products?.map(element => {
             return (
               <ProductItems
                 key={element.id}
@@ -71,12 +119,12 @@ function Products(props) {
                 addToCart={props.addToCart}
                 item={element}
               />
-            );
+            )
           })}
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default Products;
+export default Products

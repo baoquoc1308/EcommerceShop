@@ -18,7 +18,7 @@
   font-weight: 300;
   line-height: 1;
   letter-spacing: 0;
-  display: flex;
+  display: flex;  
   align-items: center;
   justify-content: center;
   transition: background-color .1s cubic-bezier(.4,0,.6,1);
@@ -49,4 +49,12 @@
 
 .btn-remove-product {
   background-color: #ffa9dd;
+}
+
+.ant-modal-root .ant-modal-mask {
+  background-color: transparent;
+  box-shadow: 0
+}
+.ant-modal .ant-modal-content {
+  box-shadow: none;
 }

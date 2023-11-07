@@ -7,12 +7,11 @@ import {
   AiOutlineShoppingCart,
   AiOutlineSearch,
 } from "react-icons/ai";
-import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import logo from "./images/logo.png";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import AvatarDropdown from "./TopNavigation/AccountMenu";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import { fetchApi } from "../api/api";
 
@@ -94,7 +93,7 @@ function Navbar(props) {
     <div className="">
       <nav className="flex flex-col fixed  top-0  min-w-full shadow-md z-50">
         <ul
-          className={`flex flex-row p-2.5 z-30 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"}`
+          className={`flex flex-row p-2.5 z-30 bg-gray-200`
           }
         >
           <label htmlFor="" className="mx-3 cursor-pointer">
@@ -139,21 +138,6 @@ function Navbar(props) {
                 Order{" "}
               </li>
             </NavLink>
-
-            <div className="ml-auto mx-6 mt-2 flex items-center relative cursor-pointer">
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchInput}
-                onChange={handleInputChange}
-                className={`border border-gray-300 p-1 rounded-md pl-10 ${
-                  props.mode === "dark"
-                    ? "text-white bg-gray-500"
-                    : "bg-gray-200"
-                }`}
-              />
-              <AiOutlineSearch className="absolute left-3 top-2 text-gray-500" />
-            </div>
           </ul>
 
           <li className="ml-auto mx-6 mt-2 relative cursor-pointer">
@@ -166,11 +150,7 @@ function Navbar(props) {
           </li>
 
           <li className="mx-2 mt-2 cursor-pointer" onClick={props.toggleMode}>
-            {props.mode === "dark" ? (
-              <BsSun size={25} />
-            ) : (
-              <BsFillMoonFill size={25} />
-            )}
+            
           </li>
           <li
             className="mx-2 cursor-pointer sm:hidden mt-2"
@@ -203,8 +183,7 @@ function Navbar(props) {
         </ul>
 
         <ul
-          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-2.5 z-10 ${Margin} duration-500 sm:hidden text-lg ${props.mode === "dark" ? "text-white bg-gray-600" : "bg-gray-200"
-            }`}
+          className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-2.5 z-10 ${Margin} duration-500 sm:hidden text-lg `}
         >
           <NavLink to="/" className="ml-auto font-semibold text-xl">
             <li onClick={responsiveMenu}>Home </li>
@@ -221,9 +200,7 @@ function Navbar(props) {
         </ul>
         {showScrollToTopButton && (
           <div
-            className={`scroll-to-top-button ${
-              props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"
-            }`}
+            className={`scroll-to-top-button`}
             onClick={scrollToTop}
           ></div>
         )}

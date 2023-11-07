@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from "react-router-dom";
 
-const Contact = () => {
+const Contact = (props) => {
   const googleMapsURL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220235.78631011717!2d106.52803673028657!3d10.828039308819054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a3f1b2e8bfb%3A0xb3c9b77dcc25ebc7!2zU2nDqnUgdGjhu4sgVGjhur8gR2nhu5tpIERpIMSQ4buZbmc!5e0!3m2!1svi!2s!4v1691831495590!5m2!1svi!2s";
   const [form] = Form.useForm()
   const navigate = useNavigate();
@@ -49,6 +49,8 @@ const Contact = () => {
       navigate('/')
     }, 1500);
   }
+
+  props.myFun2(true)
 
   return (
     <div className="checkout-container">
