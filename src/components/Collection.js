@@ -13,13 +13,11 @@ import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import { Link, useNavigate } from "react-router-dom";
 import "./Collection.scss";
 import { Rate } from "antd";
+import { formatNumber } from '../utils';
 
 function Collection(props) {
   const { addItem } = useCart();
   const ref = useRef(null);
-  const formatNumber = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
   const handleClick = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -66,7 +64,7 @@ function Collection(props) {
     });
   };
 
-  // props.myFun(false);
+  props.myFun2(true);
 
   return (
     <div className=" my-20">
@@ -131,9 +129,7 @@ function Collection(props) {
 
       <h1
         ref={ref}
-        className={`text-center font-semibold text-2xl uppercase my-8 ${
-          props.mode === "dark" ? "text-white" : "text-black"
-        }`}
+        className={`text-center font-semibold text-2xl uppercase my-8`}
       >
         {category}
       </h1>
@@ -200,7 +196,7 @@ function Collection(props) {
                       addItem(element);
                       toast.success("Product added to cart", {
                         position: "top-right",
-                        autoClose: 1500,
+                        autoClose: 500,
                       });
                     } else {
                       notifyError();

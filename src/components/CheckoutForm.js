@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CheckoutForm.css";
 import { Button, Input } from "antd";
 import { Form } from "antd";
@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
+import { info } from 'sass';
 
 const CheckoutForm = () => {
   const [form] = Form.useForm();
@@ -13,6 +14,7 @@ const CheckoutForm = () => {
   const { emptyCart, clearCartMetadata } = useCart();
   const infoUserJSON = localStorage.getItem("infoOrder");
   const infoUser = JSON.parse(infoUserJSON);
+  const [reload, setReload] = useState(false)
 
   const isValidFullName = (rule, value) => {
     if (!value) {
@@ -49,20 +51,30 @@ const CheckoutForm = () => {
     emptyCart();
     clearCartMetadata();
   };
-  {
-    infoUser
-      ? toast.success(
-        "Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?",
+
+
+
+  useEffect(() => {
+      !!infoUser &&
+      reload &&
+
+      toast.success(
+        'Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?',
         {
-          position: "top-right",
-          autoClose: 3000,
+          position: 'top-right',
+          autoClose: 1500,
         }
       )
-      : toast.warning("Vui lòng nhập thông tin cá nhân.", {
-        position: "top-right",
-        autoClose: 2000,
-      });
-  }
+    infoUser === null &&
+    reload &&
+      toast.warning('Vui lòng nhập thông tin cá nhân.', {
+        position: 'top-right',
+        autoClose: 1500,
+      })
+  }, [reload])
+  useEffect(() => {
+    setReload(true)
+  }, [infoUser, reload])
 
   const handleOnFinish = (values) => {
     localStorage.setItem("infoOrder", JSON.stringify(values));
@@ -90,7 +102,7 @@ const CheckoutForm = () => {
           label="Full Name"
           name="fullname"
           rules={[
-            { required: true, message: "Please input your full name!" },
+            { required: true, message: 'Please input your full name!' },
             { validator: isValidFullName },
           ]}
         >
@@ -100,10 +112,10 @@ const CheckoutForm = () => {
           label="Email"
           name="email"
           rules={[
-            { required: true, message: "Please input your Email!" },
+            { required: true, message: 'Please input your Email!' },
             {
-              type: "email",
-              message: "Please enter a valid email address!",
+              type: 'email',
+              message: 'Please enter a valid email address!',
             },
           ]}
         >
@@ -112,7 +124,7 @@ const CheckoutForm = () => {
         <Form.Item
           label="Address"
           name="address"
-          rules={[{ required: true, message: "Please input your Address!" }]}
+          rules={[{ required: true, message: 'Please input your Address!' }]}
         >
           <Input placeholder="Address" />
         </Form.Item>
@@ -120,7 +132,7 @@ const CheckoutForm = () => {
           label="Phone"
           name="phone"
           rules={[
-            { required: true, message: "Please enter your phone number!" },
+            { required: true, message: 'Please enter your phone number!' },
             { validator: isValidPhoneNumber },
           ]}
         >
@@ -132,7 +144,7 @@ const CheckoutForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input Notes!",
+              message: 'Please input Notes!',
             },
           ]}
         >
@@ -147,10 +159,11 @@ const CheckoutForm = () => {
           >
             MUA HÀNG
           </Button>
+          
         </Form.Item>
       </Form>
     </div>
-  );
+  )
 }
 
 export default CheckoutForm;

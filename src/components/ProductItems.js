@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ScrollAnimation from "react-animate-on-scroll";
 import "./ProductItems.scss";
 import { Rate } from "antd";
+import { formatNumber } from '../utils';
 
 // const Msg = () => (
 //   <div className=' text-center'>
@@ -31,10 +32,6 @@ const ProductItems = (props) => {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
-
-  const formatNumber = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
 
   const notifySuccess = () => {
     addItem(props.item);

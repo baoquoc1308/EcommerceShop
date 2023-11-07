@@ -57,22 +57,14 @@ function Login(props) {
   return (
     <div className="grid">
       <div
-        className={`flex flex-col ${
-          props.mode === "dark"
-            ? "bg-gray-500 text-white"
-            : "bg-gray-200 text-black"
-        } shadow-xl align-middle my-36 md:w-80 md:mx-auto rounded-xl mx-10`}
+        className={`flex flex-col  shadow-xl align-middle my-36 md:w-80 md:mx-auto rounded-xl mx-10 bg-gray-200 `}
       >
         <h2 className="text-center mt-2">
           {display === "hidden"
             ? "Not Registered?"
             : "Already have an account?"}
           <span
-            className={`${
-              props.mode === "dark"
-                ? "text-blue-300"
-                : "text-blue-600 cursor-pointer"
-            }`}
+            className={`text-blue-600 cursor-pointer`}
             onClick={register}
           >
             Click here
@@ -126,11 +118,7 @@ function Login(props) {
           >
             Forgot{" "}
             <span
-              className={`${
-                props.mode === "dark"
-                  ? "text-blue-300"
-                  : "text-blue-600 cursor-pointer"
-              }`}
+              className={`text-blue-600 cursor-pointer`}
             >
               password?
             </span>

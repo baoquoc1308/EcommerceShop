@@ -23,6 +23,7 @@ const AvatarDropdown = () => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("storedOrders");
       localStorage.removeItem("dataUser");
+      localStorage.removeItem('infoOrder')
       toast.success("Logged out successfully!", {
         position: "top-right",
       });

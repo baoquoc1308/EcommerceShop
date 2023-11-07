@@ -7,6 +7,9 @@ import "./Cart.scss";
 import { Modal } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QuestionCircleTwoTone } from '@ant-design/icons'
+import { formatNumber } from '../utils';
+
 
 const Cart = (props) => {
   // props.myFun(false);
@@ -24,9 +27,6 @@ const Cart = (props) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
-  const formatNumber = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
   const handleCheckout = (order) => {
     let storedOrders = JSON.parse(localStorage.getItem("storedOrders")) || [];
     storedOrders.push(order);
@@ -42,7 +42,7 @@ const Cart = (props) => {
     setOpen(false);
     toast.success("Đã xóa 1 sản phẩm ra khỏi giỏ hàng!", {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 1500,
     });
   };
   const showDeleteModal = (productId) => {
@@ -72,19 +72,15 @@ const Cart = (props) => {
         src={cart}
         alt="Loading"
         srcset=""
-        className={`${props.mode === "dark" ? "invert" : ""}`}
+        className={""}
       />
       <h1
-        className={`mx-auto mt-5 md:mt-0 text-lg ${props.mode === "dark" ? "text-white" : "text-black"
-          }`}
+        className={`mx-auto mt-5 md:mt-0 text-lg`}
       >
         Your cart is empty
         <Link to="/">
           <button
-            className={`${props.mode === "dark"
-                ? "bg-white text-black"
-                : "bg-black text-white"
-              } p-2 rounded-sm mx-2`}
+            className={` p-2 rounded-sm mx-2`}
           >
             Home
           </button>
@@ -177,22 +173,24 @@ const Cart = (props) => {
               <AiOutlineDelete size={15} />
             </button>
             <Modal
-              title="Xóa sản phẩm khỏi giỏ hàng!"
+              title="Delete Confirmation"
               open={open}
               onOk={() => handleDeleteProducts(productToDelete)}
               onCancel={hideModal}
-              okText="Xóa"
-              cancelText="Hủy"
+              okText="Ok"
+              cancelText="Cancel"
             >
-              <p>Bạn có muốn xóa sản phẩm này không?</p>
+              <div className="modal-delete">
+                <QuestionCircleTwoTone className="modal-delete__icon" />
+                <p className="modal-delete__msg">Do you want to delete this order?</p>
+              </div>
             </Modal>
           </div>
         );
       })}
 
       <div
-        className={`cartNav fixed bottom-0 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"
-          } w-full px-6 py-2 font-semibold`}
+        className={`cartNav fixed bottom-0 w-full px-6 py-2 font-semibold bg-gray-200`}
       >
         <div className="flex ">
           <div className="flex flex-col">
