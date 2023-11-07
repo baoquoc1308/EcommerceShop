@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./CheckoutForm.css";
-import { Alert, Button, Input } from "antd";
+import { Button, Input } from "antd";
 import { Form } from "antd";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
-import { useEffect } from "react";
 
 const CheckoutForm = () => {
   const [form] = Form.useForm();
@@ -50,20 +49,19 @@ const CheckoutForm = () => {
     emptyCart();
     clearCartMetadata();
   };
-
   {
     infoUser
       ? toast.success(
-          "Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?",
-          {
-            position: "top-right",
-            autoClose: 3000,
-          }
-        )
-      : toast.warning("Vui lòng nhập thông tin cá nhân.", {
+        "Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?",
+        {
           position: "top-right",
-          autoClose: 2000,
-        });
+          autoClose: 3000,
+        }
+      )
+      : toast.warning("Vui lòng nhập thông tin cá nhân.", {
+        position: "top-right",
+        autoClose: 2000,
+      });
   }
 
   const handleOnFinish = (values) => {
@@ -140,7 +138,7 @@ const CheckoutForm = () => {
         >
           <Input placeholder="Please input Notes" />
         </Form.Item>
-        <div className="address-company">{/* <FilterLocation /> */}</div>
+        <div className="address-company"></div>
         <Form.Item>
           <Button
             type="primary"
@@ -153,6 +151,6 @@ const CheckoutForm = () => {
       </Form>
     </div>
   );
-};
+}
 
 export default CheckoutForm;

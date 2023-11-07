@@ -40,6 +40,7 @@ const ProductItems = (props) => {
     addItem(props.item);
     toast("Product added to cart", {
       position: toast.POSITION.TOP_RIGHT,
+      autoClose: 500,
     });
   };
 

@@ -12,16 +12,10 @@ const Cart = (props) => {
   // props.myFun(false);
   props.myFun2(false);
 
-  const {
-    isEmpty,
-    totalUniqueItems,
-    items,
-    updateItemQuantity,
-    removeItem,
-    emptyCart,
-    clearCartMetadata,
-  } = useCart();
-  const [totalAllProduct, setTotalAllProduct] = useState(0);
+  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem, emptyCart, clearCartMetadata } =
+    useCart();
+  const [totalAllProduct, setTotalAllProduct] = useState(0)
+  const [productToDelete, setProductToDelete] = useState(null);
 
   const clearCart = () => {
     emptyCart();
@@ -43,16 +37,17 @@ const Cart = (props) => {
   };
 
   const [open, setOpen] = useState(false);
-  const handleDeleteProducts = (id) => {
-    removeItem(id);
+  const handleDeleteProducts = (productId) => {
+    removeItem(productId);
     setOpen(false);
     toast.success("Đã xóa 1 sản phẩm ra khỏi giỏ hàng!", {
       position: "top-right",
       autoClose: 3000,
     });
   };
-  const showModal = () => {
+  const showDeleteModal = (productId) => {
     setOpen(true);
+    setProductToDelete(productId);
   };
   const hideModal = () => {
     setOpen(false);
@@ -80,18 +75,16 @@ const Cart = (props) => {
         className={`${props.mode === "dark" ? "invert" : ""}`}
       />
       <h1
-        className={`mx-auto mt-5 md:mt-0 text-lg ${
-          props.mode === "dark" ? "text-white" : "text-black"
-        }`}
+        className={`mx-auto mt-5 md:mt-0 text-lg ${props.mode === "dark" ? "text-white" : "text-black"
+          }`}
       >
         Your cart is empty
         <Link to="/">
           <button
-            className={`${
-              props.mode === "dark"
+            className={`${props.mode === "dark"
                 ? "bg-white text-black"
                 : "bg-black text-white"
-            } p-2 rounded-sm mx-2`}
+              } p-2 rounded-sm mx-2`}
           >
             Home
           </button>
@@ -142,10 +135,10 @@ const Cart = (props) => {
                   <span class="num-new-price">
                     {formatNumber(
                       item.price * 23000 -
-                        Math.round(
-                          (item.price * item?.discountPercentage) / 100
-                        ) *
-                          23000
+                      Math.round(
+                        (item.price * item?.discountPercentage) / 100
+                      ) *
+                      23000
                     )}
                   </span>
                 </div>
@@ -172,21 +165,21 @@ const Cart = (props) => {
                 {formatNumber(
                   (item.price * 23000 -
                     Math.round((item.price * item?.discountPercentage) / 100) *
-                      23000) *
-                    item?.quantity
+                    23000) *
+                  item?.quantity
                 )}
               </span>
             </div>
             <button
               className="btn-remove-product my-2 mx-2"
-              onClick={showModal}
+              onClick={() => showDeleteModal(item.id)}
             >
               <AiOutlineDelete size={15} />
             </button>
             <Modal
               title="Xóa sản phẩm khỏi giỏ hàng!"
               open={open}
-              onOk={() => handleDeleteProducts(item?.id)}
+              onOk={() => handleDeleteProducts(productToDelete)}
               onCancel={hideModal}
               okText="Xóa"
               cancelText="Hủy"
@@ -198,9 +191,8 @@ const Cart = (props) => {
       })}
 
       <div
-        className={`cartNav fixed bottom-0 ${
-          props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"
-        } w-full px-6 py-2 font-semibold`}
+        className={`cartNav fixed bottom-0 ${props.mode === "dark" ? "text-white bg-gray-500" : "bg-gray-200"
+          } w-full px-6 py-2 font-semibold`}
       >
         <div className="flex ">
           <div className="flex flex-col">
