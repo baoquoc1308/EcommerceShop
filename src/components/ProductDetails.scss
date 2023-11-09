@@ -1,14 +1,17 @@
 .image-products {
-  max-width: 50%;
+  max-width: 500px;
+  height: 300px;
 }
 
-.discountPercentage {
+.discountPercentage_details {
   position: absolute;
   z-index: 1;
+  margin-left: 20px;
+  margin-top: 10px;
 
   .number-discount {
     display: block;
-    padding: 0.125rem 0.25rem;
+    padding-left: 0.25rem;
     background-color: #ffe97a;
     border-bottom-left-radius: 0.125rem;
 
@@ -55,4 +58,9 @@
     }
 
   }
+}
+.ant-rate {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  display: block;
 }

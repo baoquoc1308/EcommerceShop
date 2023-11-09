@@ -50,6 +50,7 @@ const Contact = (props) => {
     }, 1500);
   }
 
+  props.myFun(false)
   props.myFun2(true)
 
   return (
