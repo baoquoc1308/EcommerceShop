@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "react-use-cart";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollAnimation from "react-animate-on-scroll";
-import "./ProductItems.scss";
-import { Rate } from "antd";
+import { Rate, BackTop } from "antd";
 import { formatNumber } from '../utils';
-
-// const Msg = () => (
-//   <div className=' text-center'>
-//      {/* <h1 className='text-lg font-bold'>Added To Cart</h1> */}
-//    <Link to="/cart"><button className='my-2 bg-black text-white p-2 rounded-md '>Go to Cart</button></Link>
-//   </div>
-// )
+import "./ProductItems.scss";
 
 const ProductItems = (props) => {
   <ToastContainer
@@ -28,6 +21,7 @@ const ProductItems = (props) => {
     pauseOnHover
     theme="light"
   />;
+const [showBackTop, setShowBackTop] = useState(false)
 
   const { addItem } = useCart();
   const navigate = useNavigate();
@@ -53,9 +47,21 @@ const ProductItems = (props) => {
   const handleAddItem = () => {
     token !== null ? notifySuccess() : notifyError();
   };
+  const handleScroll = () => {
+    setShowBackTop(window.scrollY > 300)
+  }
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   return (
     <>
+      {/* <BackTop visibilityHeight={200}>
+        <div className="ant-back-top-inner">↑</div>
+      </BackTop> */}
       <ScrollAnimation animateIn="fadeIn">
         <div
           className={`bg-white shadow-lg rounded-2xl p-3 flex flex-col  transition-all `}
@@ -118,8 +124,13 @@ const ProductItems = (props) => {
           </div>
         </div>
       </ScrollAnimation>
+      {showBackTop && (
+        <BackTop visibilityHeight={300}>
+          <div className="ant-back-top-inner">↑</div>
+        </BackTop>
+      )}
     </>
-  );
+  )
 };
 
 export default ProductItems;

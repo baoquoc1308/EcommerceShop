@@ -134,7 +134,7 @@ const Checkout = props => {
   ]
 
   useEffect(() => {
-    // props.myFun(false);
+    props.myFun(false);
     props.myFun2(true)
   }, [])
 

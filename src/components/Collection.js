@@ -41,12 +41,12 @@ function Collection(props) {
     setcategory(collection);
     handleClick();
     fetchApi(
-      "GET",
-      "https://dummyjson.com",
+      'GET',
+      'https://dummyjson.com',
       `products/category/${collection}`,
       handleResponseGetCategoryProducts,
       handleError
-    );
+    )
   };
 
   const notifySuccess = () => {
@@ -64,7 +64,8 @@ function Collection(props) {
     });
   };
 
-  props.myFun2(true);
+  props.myFun(false);
+  props.myFun2(true)
 
   return (
     <div className=" my-20">

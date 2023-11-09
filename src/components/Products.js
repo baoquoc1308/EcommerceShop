@@ -7,8 +7,11 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useCart } from 'react-use-cart'
 import { Select } from 'antd'
+import './Products.scss'
+import { Link, NavLink } from 'react-router-dom'
 
 function Products(props) {
+  props.myFun(true)
   props.myFun2(true)
 
   const [products, setProducts] = useState([])
@@ -44,62 +47,55 @@ function Products(props) {
 
   return (
     <div>
-      <h1
-        className={`text-3xl sm:text-5xl sm:text-center border-b-4 border-orange-400 font-bold inline-block mx-4 md:mx-6 mt-20 text-center `}
-      >
-        Featured Products
-      </h1>
-      <>
-        <Select
-          showSearch
-          style={{
-            width: 200,
-          }}
-          placeholder="Search to Select"
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            (option?.label ?? '').includes(input)
-          }
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? '')
-              .toLowerCase()
-              .localeCompare((optionB?.label ?? '').toLowerCase())
-          }
-          options={[
-            {
-              value: '',
-              label: 'All products',
-            },
-            {
-              value: 'shoes',
-              label: 'Shoes',
-            },
-            {
-              value: 'watch',
-              label: 'Watch',
-            },
-            {
-              value: 'womens',
-              label: 'Womens',
-            },
-            {
-              value: 'man',
-              label: 'Man',
-            },
-            {
-              value: '5',
-              label: 'Resolved',
-            },
-            {
-              value: '6',
-              label: 'Cancelled',
-            },
-          ]}
-          // 'https://dummyjson.com/products/search?q=phone'
-          // ``
-          onChange={e => handleSelectProduct(e)}
-        />
-      </>
+      <h1 className="cate">Featured Products</h1>
+      <Select
+        showSearch
+        style={{
+          width: 200,
+        }}
+        placeholder="Search to Select"
+        optionFilterProp="children"
+        filterOption={(input, option) => (option?.label ?? '').includes(input)}
+        filterSort={(optionA, optionB) =>
+          (optionA?.label ?? '')
+            .toLowerCase()
+            .localeCompare((optionB?.label ?? '').toLowerCase())
+        }
+        options={[
+          {
+            value: '',
+            label: 'All products',
+          },
+          {
+            value: 'shoes',
+            label: 'Shoes',
+          },
+          {
+            value: 'watch',
+            label: 'Watch',
+          },
+          {
+            value: 'womens',
+            label: 'Womens',
+          },
+          {
+            value: 'man',
+            label: 'Man',
+          },
+          {
+            value: 'bag',
+            label: 'Bag',
+          },
+          {
+            value: 'glasses',
+            label: 'Glasses',
+          },
+        ]}
+        // 'https://dummyjson.com/products/search?q=phone'
+        // ``
+        onChange={e => handleSelectProduct(e)}
+      />
+      <hr className="hr-separator" />
 
       {loading ? (
         <Spinner />

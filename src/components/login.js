@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchApi } from "../api/api";
 import { useNavigate } from "react-router-dom";
-
+import "./Login.scss"
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ function Login(props) {
   const navigate = useNavigate();
 
 
-  // props.myFun(false);
+  props.myFun(false);
   props.myFun2(false);
 
   const handleResponseLogin = (data) => {
@@ -55,18 +55,15 @@ function Login(props) {
   };
 
   return (
-    <div className="grid">
+    <div className="grid login-container">
       <div
         className={`flex flex-col  shadow-xl align-middle my-36 md:w-80 md:mx-auto rounded-xl mx-10 bg-gray-200 `}
       >
         <h2 className="text-center mt-2">
-          {display === "hidden"
-            ? "Not Registered?"
-            : "Already have an account?"}
-          <span
-            className={`text-blue-600 cursor-pointer`}
-            onClick={register}
-          >
+          {display === 'hidden'
+            ? 'Not Registered?'
+            : 'Already have an account?'}
+          <span className={`text-blue-600 cursor-pointer`} onClick={register}>
             Click here
           </span>
         </h2>
@@ -77,14 +74,14 @@ function Login(props) {
             type="text"
             placeholder="Enter email"
             className="my-2  rounded-md w-full p-2 text-black"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <h3 className="my-2">Password</h3>
           <input
             type="password"
             placeholder="Enter password"
             className="my-2 rounded-md w-full p-2 text-black"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
           {/* for registering */}
           <div className={`${display} w-full`}>
@@ -113,20 +110,16 @@ function Login(props) {
           </button>
           <h5
             className={`text-right my-2 ${
-              display === "hidden" ? "inline-block" : "hidden"
+              display === 'hidden' ? 'inline-block' : 'hidden'
             }`}
           >
-            Forgot{" "}
-            <span
-              className={`text-blue-600 cursor-pointer`}
-            >
-              password?
-            </span>
+            Forgot{' '}
+            <span className={`text-blue-600 cursor-pointer`}>password?</span>
           </h5>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Login;

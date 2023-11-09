@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
 import { fetchApi } from '../api/api'
@@ -9,8 +9,10 @@ import './ProductDetails.scss'
 import { Spin } from 'antd'
 import { Rate } from 'antd'
 
-
 function ProductDetails(props) {
+  props.myFun(false)
+  props.myFun2(false)
+
   const [products, setProducts] = useState([])
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -77,6 +79,13 @@ function ProductDetails(props) {
         {!loading ? (
           <div className="product flex flex-col lg:flex-row">
             <div className="img lg:mx-4">
+              <div class="discountPercentage_details">
+                <div class="number-discount">
+                  <span class="percent">
+                    {Math.round(products?.discountPercentage)}%
+                  </span>
+                </div>
+              </div>
               <img
                 src={products?.images?.[0]}
                 alt="Loading"
@@ -95,7 +104,6 @@ function ProductDetails(props) {
                     {formatNumber(products?.price * 23000)}
                   </span>
                 </div>
-                <div> </div>
                 <div class="new-price">
                   <span class="unit-price">₫</span>
                   <span class="num-new-price">
@@ -109,9 +117,11 @@ function ProductDetails(props) {
                   </span>
                 </div>
               </div>
+              <Rate disabled defaultValue={products?.rating} />
               <button
-                className="bg-gray-500 text-white text-center  rounded-xl my-3 px-4 py-2 hover:scale-95" 
-                id = "add" onClick={handleAddItem}
+                className="bg-gray-500 text-white text-center  rounded-xl my-3 px-4 py-2 hover:scale-95"
+                id="add"
+                onClick={handleAddItem}
               >
                 Buy Now
               </button>

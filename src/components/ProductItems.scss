@@ -1,14 +1,14 @@
 .description {
-  max-height: 3em; /* Số lượng dòng tối đa (3em có thể thay đổi tùy thuộc vào kích thước chữ) */
-  margin: 0; /* Đảm bảo không có margin dư thừa */
-  overflow: hidden; /* Ẩn phần dư thừa nếu vượt quá max-height */
-  position: relative; /* Đảm bảo position là relative */
+  max-height: 3em; 
+  margin: 0; 
+  overflow: hidden; 
+  position: relative; relative 
   &:after {
-    content: "..."; /* Thêm dấu "..." */
-    position: relative; /* Đặt vị trí là tuyệt đối */
-    bottom: 0; /* Đặt ở phía dưới */
-    right: 0; /* Đặt ở bên phải */
-    background: white; /* Đặt màu nền là trắng để che phần cuối nếu cần thiết */
+    content: "..."; 
+    position: relative; 
+    bottom: 0; 
+    right: 0; 
+    background: white; 
   }
 }
 
@@ -69,4 +69,20 @@
 
 .ant-rate {
   margin-top: 1rem;
+}
+
+.ant-back-top-inner {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  border: 1px solid burlywood;
+  background-color: #f2f1d3;
+  color: #234532;
+  text-align: center;
+  font-size: 20px;
+}
+.ant-back-top-inner:hover {
+  background-color: #91b4db;
+  color: #333;
 }
