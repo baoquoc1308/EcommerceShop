@@ -113,20 +113,29 @@ function ProductDetails(props) {
     // Nếu products?.category thay đổi giá trị, useEffect sẽ chạy lại hàm bên trong nó.
   }, [products?.category])
   // Khởi tạo giá trị ban đầu cho oldId bằng cách lấy phần tử cuối cùng trong mảng được tạo bằng cách tách chuỗi location.pathname với ký tự '/'.
+  // Hiện tại oldId = id trên URL của sản phẩm được xem chi tiết, ví dụ: location.pathname.split('/').pop() = 5 -> oldId = 5
   const [oldId, setOldId] = useState(location.pathname.split('/').pop())
+  // isReloaded = true thì màn hình window reload lại để hiển thị sản phẩm theo id được cập nhật trên url
+  // isReloaded = false thì ko reload lại màn hình window
   const [isReloaded, setIsReloaded] = useState(false)
   useEffect(() => {
+    // so sánh 2 id (oldId lúc đầu và oldId sau khi click vào sản phẩm tương tự trong trang chi tiết) nếu oldId(sau khi cập nhật, ví dụ: = 4) khác với oldId ban đầu (=5)
+    // thì chúng ta cho reload lại màn hình, để call api productDetails cho id mới dòng 128
     if (oldId !== location.pathname.split('/').pop()) {
       setOldId(location.pathname.split('/').pop())
       window.location.reload()
       setIsReloaded(true)
     }
+    // sau đó để ngừng thì cần cho isReload = false nếu như chúng ta ko click sản phẩm tương tự
+    // lúc đó oldId đã được cập nhật là oldId = 4, còn "location.pathname.split('/').pop()" lúc này trên URL cũng = 4
+    // thì sẽ ko cần reload lại trang nữa
     if (oldId === location.pathname.split('/').pop()) {
       setIsReloaded(false)
     }
   }, [location.pathname, isReloaded])
 
   useEffect(() => {
+    // cập nhật giá trị của state variable oldId với giá trị mới của ID trong URL (lấy từ location.pathname).
     setOldId(location.pathname.split('/').pop())
   }, [])
 
