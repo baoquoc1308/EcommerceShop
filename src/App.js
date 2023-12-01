@@ -1,13 +1,13 @@
 import Products from './components/Products'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
-import ProductDetails from './components/ProductDetails'
+import ProductDetails from './components/ProductDetails/index'
 import { Routes, Route } from 'react-router-dom'
 import Cart from './components/Cart'
 import { CartProvider } from 'react-use-cart'
-import Footer from './components/Footer'
+import Footer from './components/Footer/index'
 import Collection from './components/Collection'
-import Login from './components/login'
+import Login from './components/Login'
 import Checkout from './components/Checkout'
 import CheckoutForm from './components/CheckoutForm'
 import Contact from './components/Contact'
@@ -37,7 +37,7 @@ function App() {
 
         <Routes>
           <Route
-            path="/productDetails"
+            path="/productDetails/:id"
             element={
               <ProductDetails
                 mode={Mode}

@@ -1,0 +1,62 @@
+.products-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.title-product {
+  color: inherit;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.plus-minus-quantity {
+  outline: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.6, 1);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 2px;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.8);
+  width: 32px;
+  height: 32px;
+}
+
+.quantity-products {
+  display: flex;
+  margin-top: 0.8rem;
+}
+
+.total-price {
+  margin-left: 1rem;
+  .unit-total-price {
+    font-size: 0.75rem;
+    color: #ee4d2d;
+  }
+  .num-total-price {
+    font-size: 16px;
+    color: #ee4d2d;
+  }
+}
+
+.btn-remove-product {
+  margin-left: 40px;
+  background-color: rgb(240, 143, 143);
+}
+
+.ant-modal-root .ant-modal-mask {
+  background-color: transparent;
+  box-shadow: 0;
+}
+.ant-modal .ant-modal-content {
+  box-shadow: none;
+}

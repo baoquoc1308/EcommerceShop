@@ -1,0 +1,92 @@
+.description {
+  max-height: 3em;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  relative &:after {
+    content: '...';
+    position: relative;
+    bottom: 0;
+    right: 0;
+    background: white;
+  }
+}
+
+.discountPercentage {
+  position: absolute;
+  z-index: 1;
+
+  .number-discount {
+    display: block;
+    padding: 0.125rem 0.25rem;
+    background-color: #ffe97a;
+    border-bottom-left-radius: 0.125rem;
+
+    .percent {
+      display: block;
+      color: #ec3814;
+      font-size: 0.75rem;
+      line-height: 0.875rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.price-total {
+  padding: 0.5rem 0 0;
+  display: flex;
+  height: 1.25rem;
+  align-items: center;
+  overflow: hidden;
+
+  .old-price {
+    text-decoration: line-through;
+    color: #bdbdbd;
+    .unit-price {
+      font-size: 0.75rem;
+      color: #bdbdbd;
+    }
+
+    .num-old-price {
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+  }
+
+  .new-price {
+    margin-left: 1rem;
+    .unit-price {
+      font-size: 0.75rem;
+      color: #ee4d2d;
+    }
+    .num-new-price {
+      font-size: 16px;
+      color: #ee4d2d;
+    }
+  }
+}
+
+.ant-rate {
+  margin-right: 1rem;
+  display: block;
+  color: #ed730e;
+}
+
+.ant-back-top-inner {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  border: 1px solid burlywood;
+  background-color: #f2f1d3;
+  color: #234532;
+  text-align: center;
+  font-size: 20px;
+}
+.ant-back-top-inner:hover {
+  background-color: burlywood;
+  color: #333;
+}
+.stock {
+  margin-top: 20px;
+}
