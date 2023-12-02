@@ -10,12 +10,10 @@ import '../Products/index.scss'
 
 function Products(props) {
   props.myFun(true)
-
   props.myFun2(true)
   // Destructuring phần tử Option từ component Select
   const { Option } = Select
   const [products, setProducts] = useState([])
-
   const [loading, setLoading] = useState(false)
   const [sortOption, setSortOption] = useState(null)
   // hàm xử lý khi nhận được dữ liệu từ API, cập nhật state products với dữ liệu mới.
@@ -55,6 +53,7 @@ function Products(props) {
     if (sortOption === 'lowToHigh') {
       // Sắp xếp sản phẩm theo giá tăng dần
       setProducts({
+        // Sử dụng hàm sort để sắp xếp mảng sản phẩm. Hàm sort nhận một hàm so sánh làm tham số
         products: products.products.sort((a, b) => a.price - b.price),
       })
     } else if (sortOption === 'highToLow') {
@@ -120,8 +119,7 @@ function Products(props) {
             label: 'Glasses',
           },
         ]}
-        // 'https://dummyjson.com/products/search?q=phone'
-        // ``
+        // Khi giá trị của trường chọn thay đổi, hàm này sẽ được gọi với đối số là sự kiện (e), và sau đó nó gọi hàm handleSelectProduct với đối số là giá trị của sự kiện.
         onChange={e => handleSelectProduct(e)}
       />
       <Select
@@ -148,7 +146,6 @@ function Products(props) {
                 category={element.category}
                 description={element.description}
                 image={element?.images[0]}
-                mode={props.mode}
                 addToCart={props.addToCart}
                 item={element}
               />

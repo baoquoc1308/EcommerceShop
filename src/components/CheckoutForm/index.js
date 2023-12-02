@@ -75,6 +75,7 @@ const CheckoutForm = () => {
     // Kiểm tra xem infoUser có tồn tại hay không. !! là cách chuyển đổi một giá trị thành giá trị boolean, đảm bảo rằng giá trị kiểm tra là true nếu infoUser tồn tại và ngược lại.
     !!infoUser &&
       // Nếu reload là true và infoUser tồn tại, hiển thị một thông báo
+      // một cách để kích hoạt lại một số hành động sau khi infoUser hoặc các giá trị khác liên quan thay đổi, đồng thời giữ cho thông báo chỉ hiển thị một lần trong quá trình kích hoạt.
       reload &&
       toast.success(
         'Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?',

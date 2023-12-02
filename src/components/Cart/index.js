@@ -22,7 +22,9 @@ const Cart = props => {
   const token = localStorage.getItem('accessToken')
 
   const handleCheckout = order => {
+    // Dòng này truy xuất danh sách các đơn hàng được lưu trữ hiện tại từ tệp localStorage. Nó sử dụng localStorage.getItem('storedOrders')để lấy giá trị liên quan đến khóa 'storedOrders'. Nếu có một giá trị, nó sẽ được phân tích cú pháp từ định dạng JSON bằng cách sử dụng JSON.parse(). Nếu không có giá trị hoặc phân tích cú pháp không thành công, một mảng trống []sẽ được gán cho
     let storedOrders = JSON.parse(localStorage.getItem('storedOrders')) || []
+    // Nội dung được truyền vào hàm sẽ được thêm vào storedOrdersmảng. Điều này thể hiện việc thêm một đơn hàng mới vào danh sách các đơn hàng đã lưu trước đó.
     storedOrders.push(order)
     // thêm đơn hàng mới vào mảng storedOrders trong localStorage
     localStorage.setItem('storedOrders', JSON.stringify(storedOrders))

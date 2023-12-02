@@ -30,7 +30,7 @@ function ProductDetails(props) {
   const [productsSuggestion, setProductsSuggestion] = useState([])
   // Kiểm tra xem productsSuggestion có tồn tại và có thuộc tính products không. Nếu có, nó sẽ trả về mảng sản phẩm, ngược lại sẽ là undefined.
   const newProductsSuggestion = productsSuggestion?.products?.filter(item => {
-    // Nếu mảng sản phẩm tồn tại, nó sẽ lọc các sản phẩm dựa trên điều kiện. Điều kiện là chỉ giữ lại các sản phẩm có id khác với products?.id.
+    // Nếu mảng sản phẩm tồn tại, filter nó sẽ lọc các sản phẩm dựa trên điều kiện. Điều kiện là chỉ giữ lại các sản phẩm có id khác với products?.id.
     return item?.id !== products?.id
   })
 
@@ -132,6 +132,7 @@ function ProductDetails(props) {
     if (oldId === location.pathname.split('/').pop()) {
       setIsReloaded(false)
     }
+    // // đảm bảo rằng useEffect sẽ được kích hoạt và thực hiện các hành động liên quan khi có sự thay đổi trong location.pathname hoặc isReloaded
   }, [location.pathname, isReloaded])
 
   useEffect(() => {

@@ -47,9 +47,12 @@ function Login(props) {
   }
   // Được gọi khi người dùng chọn chế độ đăng ký.
   const register = () => {
+    // Kiểm tra nếu trạng thái "display" là 'hidden'
     if (display === 'hidden') {
+      // Nếu là 'hidden', thì đặt trạng thái mới là 'inline-block'
       setDisplay('inline-block')
     } else {
+      // Nếu không phải 'hidden', thì đặt trạng thái mới là 'hidden'
       setDisplay('hidden')
     }
   }

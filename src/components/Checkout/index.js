@@ -16,17 +16,21 @@ const Checkout = props => {
 
   // Hàm mở modal xác nhận xóa sản phẩm, lưu ID sản phẩm vào state
   const showModal = id => {
-    setProductIdToDelete(id) // Store the product ID to delete
+    setProductIdToDelete(id)
     setIsModalVisible(true)
   }
   // Tạo một mảng 1 chiều từ mảng đa chiều đơn hàng
   const listOrder = order.reduce((acc, val) => acc.concat(val), [])
   // Gộp các sản phẩm có cùng ID và tính tổng số lượng của chúng
   const mergedArray = {}
+  // Sử dụng flat() để chuyển đổi mảng đa chiều listOrder thành một mảng một chiều, sau đó lặp qua từng đối tượng (obj) trong mảng.
   listOrder.flat().forEach(obj => {
+    // Kiểm tra xem thuộc tính id của đối tượng hiện tại đã tồn tại trong mergedArray chưa.
     if (mergedArray[obj.id]) {
+      // Nếu id đã tồn tại, tăng giá trị thuộc tính quantity của mục tương ứng trong mergedArray bằng số lượng của đối tượng hiện tại.
       mergedArray[obj.id].quantity += obj.quantity
     } else {
+      // Nếu id chưa tồn tại, tạo một mục mới trong mergedArray với id làm khóa và một bản sao của đối tượng hiện tại ({ ...obj }).
       mergedArray[obj.id] = { ...obj }
     }
   })
@@ -34,10 +38,11 @@ const Checkout = props => {
   const resultArray = Object.values(mergedArray)
   // Hàm để xử lý việc xóa một sản phẩm
   const handleOk = () => {
-    // Perform the delete operation here
+    // Kiểm tra xem hàm productIdDelete có giá trị hay không
     if (productIdToDelete !== null) {
       // Lọc bỏ sản phẩm với id cụ thể
       const updatedData = resultArray.filter(
+        // chỉ những phần tử có id khác với productIdToDelete mới được giữ lại.
         item => item.id !== productIdToDelete
       )
       // Cập nhật state và local storage với dữ liệu đã được sửa đổi

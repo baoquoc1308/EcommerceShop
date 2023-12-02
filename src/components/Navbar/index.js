@@ -1,60 +1,16 @@
 import React from 'react'
 import { useCart } from 'react-use-cart'
-import { useState, useEffect } from 'react'
-import {
-  AiOutlineMenu,
-  AiOutlineClose,
-  AiOutlineShoppingCart,
-} from 'react-icons/ai'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import logo from '../images/logo.png'
 import { NavLink } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import AvatarDropdown from '../Logout/index'
-// import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-// import { fetchApi } from '../../api/api'
 import '../Navbar/index.scss'
 
-function Navbar(props) {
+function Navbar() {
   // Lấy đối tượng vị trí hiện tại chứa thông tin về URL hiện tại
   const location = useLocation()
-  // const [products, setProducts] = useState([])
-  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false)
-
-  // const handleResponseGetCategoryProducts = data => {
-  //   setProducts(data)
-  // }
-
-  // const handleError = () => {
-  //   toast.error('Something went wrong!', {
-  //     position: 'top-right',
-  //     autoClose: 1500,
-  //   })
-  // }
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowScrollToTopButton(true)
-      } else {
-        setShowScrollToTopButton(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    // Loại bỏ sự kiện cuộn khi component bị hủy
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth', // Sử dụng hiệu ứng trơn tru
-    })
-  }
-
   //destructuring pathname from location
   const { pathname } = location
   // Sử dụng phương thức split của Javascript để lấy tên đường dẫn trong mảng
@@ -62,31 +18,13 @@ function Navbar(props) {
   const { totalUniqueItems } = useCart()
   // lấy accessToken từ bộ nhớ cục bộ.
   const token = localStorage.getItem('accessToken')
-  const [Icon, setIcon] = useState(<AiOutlineMenu size={25} />)
-  const [Margin, setMargin] = useState('-mt-40')
-  // const [searchInput, setSearchInput] = useState('')
-  // chuyển đổi trạng thái Margin và Icon.
-  const responsiveMenu = () => {
-    if (Margin === '-mt-40') {
-      setMargin('mt-0')
-      setIcon(<AiOutlineClose size={25} />)
-    } else {
-      setMargin('-mt-40')
-      setIcon(<AiOutlineMenu size={25} />)
-    }
-  }
 
-  // const handleInputChange = event => {
-  //   // Cập nhật giá trị của ô input và gọi API để lấy sản phẩm dựa trên từ khóa tìm kiếm
-  //   setSearchInput(event.target.value)
-  //   fetchApi(
-  //     'GET',
-  //     'https://dummyjson.com',
-  //     `products/search?q=${event.target.value}`,
-  //     handleResponseGetCategoryProducts,
-  //     handleError
-  //   )
-  // }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Sử dụng hiệu ứng trơn tru
+    })
+  }
 
   return (
     <nav className="flex flex-col fixed  top-0  min-w-full shadow-md z-50">
@@ -144,16 +82,8 @@ function Navbar(props) {
           </NavLink>
         </li>
 
-        <li
-          className="mx-2 mt-2 cursor-pointer"
-          onClick={props.toggleMode}
-        ></li>
-        <li
-          className="mx-2 cursor-pointer sm:hidden mt-2"
-          onClick={responsiveMenu}
-        >
-          {Icon}
-        </li>
+        <li className="mx-2 mt-2 cursor-pointer"></li>
+        <li className="mx-2 cursor-pointer sm:hidden mt-2"></li>
         {!token ? (
           <NavLink to="/login" className="mx-6">
             <li
@@ -176,29 +106,6 @@ function Navbar(props) {
           </>
         )}
       </ul>
-
-      <ul
-        className={`flex flex-col ml-auto space-y-3 bg-slate-100 transition-all w-full p-2.5 z-10 ${Margin} duration-500 sm:hidden text-lg `}
-      >
-        <NavLink to="/" className="ml-auto font-semibold text-xl">
-          <li onClick={responsiveMenu}>Home </li>
-        </NavLink>
-        <NavLink to="/collection" className="ml-auto font-semibold text-xl">
-          <li onClick={responsiveMenu}>Collection </li>
-        </NavLink>
-        <NavLink to="/contact" className="ml-auto font-semibold text-xl">
-          <li onClick={responsiveMenu}>Contact </li>
-        </NavLink>
-        <NavLink to="/order" className="ml-auto font-semibold text-xl">
-          <li onClick={responsiveMenu}>Order </li>
-        </NavLink>
-        <NavLink to="/login" className="ml-auto font-semibold text-xl">
-          <li onClick={responsiveMenu}>Login </li>
-        </NavLink>
-      </ul>
-      {showScrollToTopButton && (
-        <div className={`scroll-to-top-button`} onClick={scrollToTop}></div>
-      )}
     </nav>
   )
 }

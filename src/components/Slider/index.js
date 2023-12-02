@@ -17,6 +17,7 @@ export const Circle = props => {
 }
 
 const Slider = () => {
+  // State để lưu giữ index của slide hiện tại.
   const [slider, setslider] = useState(1)
   const data = [1, 2, 3]
   const images = [image1, image2, image3]
@@ -52,28 +53,35 @@ const Slider = () => {
   }
 
   useEffect(() => {
-    // Tạo một interval để gọi hàm slide mỗi 4000 milliseconds (4 giây).
+    // Sử dụng useEffect để tự động chuyển đổi slide sau một khoảng thời gian.
     const interval = setInterval(slide, 4000)
 
     return () => {
-      // rong khi component unmount, xóa interval để tránh memory leaks.
+      // trong khi component unmount, xóa interval để tránh memory leaks.
       clearInterval(interval)
     }
     // chạy lại mỗi khi giá trị của slider thay đổi.
   }, [slider])
 
   return (
+    // Dùng hàm map để tạo các slide dựa trên dữ liệu trong mảng data.
     <div className="home-container">
       {data.map((el, i) => (
+        // Mỗi slide là một instance của component Slidercomponent.
         <Slidercomponent
+          // className được thiết lập để thêm các lớp CSS như slide-1, slide-2,... dựa trên index.
           className={`slide-${i + 1} slide`}
           key={i}
+          // style được sử dụng để điều chỉnh vị trí của slide dựa trên giá trị của slider. Mỗi slide sẽ được dịch chuyển theo chiều ngang (translateX) với khoảng cách là 100% của chiều rộng của slide.
           style={{ transform: `translateX(${100 * (i + 1 - slider)}%)` }}
           image={images[i]}
         />
       ))}
       <div className="slider-dots">
         {data.map((el, i) => (
+          // Dùng hàm map để tạo các điểm chấm (Circle) dựa trên dữ liệu trong mảng data.
+          // Mỗi điểm chấm là một instance của component Circle.
+          // key được thiết lập để đảm bảo tính duy nhất khi render.
           <Circle key={i} active={slider} id={i + 1} />
         ))}
       </div>

@@ -12,7 +12,6 @@ const ProductItems = props => {
   ;<ToastContainer
     position="top-center" // Xác định vị trí mặc định cho các thông báo hiển thị là ở phía trên giữa của trang.
     autoClose={500} // Đặt thời gian tự động đóng
-    hideProgressBar={false} // Xác định xem thanh tiến trình (progress bar) nên được hiển thị hay không khi toast đang hiển thị.
     newestOnTop={false} // Xác định xem toast mới nhất có nên hiển thị ở trên cùng hay không. Trong trường hợp này, mặc định là không.
     closeOnClick // Cho phép đóng toast khi người dùng nhấp vào nó.
     pauseOnFocusLoss // Tạm dừng hiển thị toast khi trang web không còn tập trung (focus) nữa
