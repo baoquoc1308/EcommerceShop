@@ -1,96 +1,92 @@
-import React, { useEffect, useState } from 'react'
-import { useCart } from 'react-use-cart'
-import { AiOutlinePlus, AiOutlineMinus, AiOutlineDelete } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
-import cart from '../images/cart.png'
-import '../Cart/index.scss'
-import { Modal } from 'antd'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { QuestionCircleTwoTone } from '@ant-design/icons'
-import { formatNumber } from '../../utils'
+import React, { useEffect, useState } from "react";
+import { useCart } from "react-use-cart";
+import { AiOutlinePlus, AiOutlineMinus, AiOutlineDelete } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import cart from "../images/cart.png";
+import "../Cart/index.scss";
+import { Modal } from "antd";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { QuestionCircleTwoTone } from "@ant-design/icons";
+import { formatNumber } from "../../utils";
 
-const Cart = props => {
-  props.myFun(false)
-  props.myFun2(true)
+const Cart = (props) => {
+  props.myFun(false);
+  props.myFun2(true);
 
   const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } =
-    useCart()
-  const [totalAllProduct, setTotalAllProduct] = useState(0)
-  const [productToDelete, setProductToDelete] = useState(null)
-  const navigate = useNavigate()
-  const token = localStorage.getItem('accessToken')
+    useCart();
+  const [totalAllProduct, setTotalAllProduct] = useState(0);
+  const [productToDelete, setProductToDelete] = useState(null);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken");
 
-  const handleCheckout = order => {
-    // Dòng này truy xuất danh sách các đơn hàng được lưu trữ hiện tại từ tệp localStorage. Nó sử dụng localStorage.getItem('storedOrders')để lấy giá trị liên quan đến khóa 'storedOrders'. Nếu có một giá trị, nó sẽ được phân tích cú pháp từ định dạng JSON bằng cách sử dụng JSON.parse(). Nếu không có giá trị hoặc phân tích cú pháp không thành công, một mảng trống []sẽ được gán cho
-    let storedOrders = JSON.parse(localStorage.getItem('storedOrders')) || []
-    // Nội dung được truyền vào hàm sẽ được thêm vào storedOrdersmảng. Điều này thể hiện việc thêm một đơn hàng mới vào danh sách các đơn hàng đã lưu trước đó.
-    storedOrders.push(order)
-    // thêm đơn hàng mới vào mảng storedOrders trong localStorage
-    localStorage.setItem('storedOrders', JSON.stringify(storedOrders))
+  const handleCheckout = (order) => {
+    let storedOrders = JSON.parse(localStorage.getItem("storedOrders")) || [];
+
+    storedOrders.push(order);
+
+    localStorage.setItem("storedOrders", JSON.stringify(storedOrders));
     setTimeout(() => {
-      navigate('/checkoutform')
-    }, 1000)
-  }
+      navigate("/checkoutform");
+    }, 1000);
+  };
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const handleDeleteProducts = productId => {
-    removeItem(productId)
-    setOpen(false)
-    toast.success('Đã xóa 1 sản phẩm ra khỏi giỏ hàng!', {
-      position: 'top-right',
+  const handleDeleteProducts = (productId) => {
+    removeItem(productId);
+    setOpen(false);
+    toast.success("Đã xóa 1 sản phẩm ra khỏi giỏ hàng!", {
+      position: "top-right",
       autoClose: 1500,
-    })
-  }
-  const showDeleteModal = productId => {
-    setOpen(true)
-    // lưu ID của sản phẩm cần xóa vào state productToDelete
-    setProductToDelete(productId)
-  }
-  // ẩn modal xác nhận xóa sản phẩm
+    });
+  };
+  const showDeleteModal = (productId) => {
+    setOpen(true);
+
+    setProductToDelete(productId);
+  };
+
   const hideModal = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
-  const handleUpdatePlusQuantity = item => {
+  const handleUpdatePlusQuantity = (item) => {
     if (item.quantity < item.stock) {
-      return updateItemQuantity(item.id, item.quantity + 1)
+      return updateItemQuantity(item.id, item.quantity + 1);
     } else {
-      toast.warning('Số lượng mua vượt quá tổng kho!', {
-        position: 'top-right',
+      toast.warning("Số lượng mua vượt quá tổng kho!", {
+        position: "top-right",
         autoClose: 1500,
-      })
+      });
     }
-  }
+  };
 
-  const handleUpdateMinusQuantity = item => {
+  const handleUpdateMinusQuantity = (item) => {
     if (item.quantity > 1) {
-      return updateItemQuantity(item.id, item.quantity - 1)
+      return updateItemQuantity(item.id, item.quantity - 1);
     }
-  }
+  };
 
   useEffect(() => {
-    // window.scrollTo(0, 0)
     if (items?.length > 0) {
-      let sum = 0
-      // Duyệt qua từng phần tử trong mảng items để tính tổng giá trị.
-      items.forEach(item => {
+      let sum = 0;
+
+      items.forEach((item) => {
         sum +=
           (item.price * 23000 -
             Math.round((item.price * item?.discountPercentage) / 100) * 23000) *
-          item?.quantity
-      })
-      // Cập nhật state totalAllProduct bằng giá trị tính được từ việc duyệt qua các sản phẩm trong giỏ hàng
-      setTotalAllProduct(sum)
+          item?.quantity;
+      });
+
+      setTotalAllProduct(sum);
     }
-    // Kết thúc useEffectvà cung cấp mảng items làm dependency.
-    // useEffect sẽ được gọi lại mỗi khi giá trị của items` thay đổi, như vậy, công việc bên trong nó sẽ được thực hiện khi giỏ hàng có sự thay đổi.
-  }, [items])
+  }, [items]);
 
   return isEmpty || token === null ? (
     <div className="grid my-36 md:my-8 align-middle justify-center ">
-      <img src={cart} alt="Loading" srcset="" className={''} />
+      <img src={cart} alt="Loading" srcset="" className={""} />
       <h1 className={`mx-auto mt-5 md:mt-0 text-lg`}>
         Your cart is empty
         <Link to="/">
@@ -101,7 +97,7 @@ const Cart = props => {
   ) : (
     <div className="my-32 mb-60">
       <h2 className="title-product">THÔNG TIN SẢN PHẨM</h2>
-      {items?.map(item => {
+      {items?.map((item) => {
         return (
           <div
             key={item.id}
@@ -200,7 +196,7 @@ const Cart = props => {
               </div>
             </Modal>
           </div>
-        )
+        );
       })}
 
       <div className={`cartNav bottom-0 w-full px-6 py-2 font-semibold`}>
@@ -227,7 +223,7 @@ const Cart = props => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

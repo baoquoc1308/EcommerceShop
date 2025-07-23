@@ -1,57 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import {
   LogoutOutlined,
   QuestionCircleTwoTone,
   UserOutlined,
-} from '@ant-design/icons'
-import { Avatar, Dropdown, Modal } from 'antd'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import './index.scss'
+} from "@ant-design/icons";
+import { Avatar, Dropdown, Modal } from "antd";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./index.scss";
 
 const AvatarDropdown = () => {
-  const [isConfirmLogout, setIsConfirmLogout] = useState(false)
-  // Lấy giá trị từ localStorage với key là 'accessToken' và lưu vào biến accessToken.
-  const accessToken = localStorage.getItem('accessToken')
-  const dataUser = localStorage.getItem('dataUser')
-  // chuyển đổi chuỗi JSON trong dataUser thành đối tượng JavaScript và lưu vào biến user.
-  const user = JSON.parse(dataUser)
-  // Lấy giá trị của thuộc tính firstName trong đối tượng user và lưu vào biến username.
-  // Sử dụng ?. để tránh lỗi nếu user không tồn tại.
-  const username = user?.firstName
-  const roleName = user?.email
+  const [isConfirmLogout, setIsConfirmLogout] = useState(false);
+
+  const accessToken = localStorage.getItem("accessToken");
+  const dataUser = localStorage.getItem("dataUser");
+
+  const user = JSON.parse(dataUser);
+
+  const username = user?.firstName;
+  const roleName = user?.email;
 
   const handleResponseLogout = () => {
-    // kiểm tra xem biến accessToken có tồn tại hay không
     if (accessToken) {
-      localStorage.removeItem('accessToken')
-      localStorage.removeItem('storedOrders')
-      localStorage.removeItem('dataUser')
-      localStorage.removeItem('infoOrder')
-      toast.success('Logged out successfully!', {
-        position: 'top-right',
-      })
-      // điều khiển việc hiển thị hoặc ẩn một hộp thoại xác nhận đăng xuất.
-      setIsConfirmLogout(false)
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("storedOrders");
+      localStorage.removeItem("dataUser");
+      localStorage.removeItem("infoOrder");
+      toast.success("Logged out successfully!", {
+        position: "top-right",
+      });
+
+      setIsConfirmLogout(false);
     }
     setTimeout(() => {
-      // làm mới lại trình duyệt sau 1 giây.
-      window.location.reload()
-    }, 1000)
-  }
+      window.location.reload();
+    }, 1000);
+  };
 
   const handleToggleConfirmLogout = () => {
-    // click để mở hoặc đóng hộp thoại xác nhận đăng xuất.
-    // cập nhật giá trị của isConfirmLogout thành đối ngược so với giá trị hiện tại của nó. Nếu trước đó isConfirmLogout là true, thì sau khi gọi hàm này nó sẽ trở thành false, và ngược lại.
-    setIsConfirmLogout(prev => !prev)
-  }
-  // click để hủy bỏ việc đăng xuất
+    setIsConfirmLogout((prev) => !prev);
+  };
+
   const handleCancel = () => {
-    setIsConfirmLogout(false)
-  }
+    setIsConfirmLogout(false);
+  };
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -70,9 +65,9 @@ const AvatarDropdown = () => {
                   <a class="user-menu-link" onClick={handleToggleConfirmLogout}>
                     <LogoutOutlined
                       style={{
-                        width: '20px',
-                        height: '20px',
-                        marginTop: ' 0.5rem',
+                        width: "20px",
+                        height: "20px",
+                        marginTop: " 0.5rem",
                       }}
                     />
                     <div>Logout</div>
@@ -82,16 +77,16 @@ const AvatarDropdown = () => {
             </div>
           </div>
         }
-        trigger={['click']}
+        trigger={["click"]}
       >
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
           <>
             <Avatar
               icon={
                 <img
                   src={
                     user?.image ||
-                    'https://cdn-icons-png.flaticon.com/512/431/431985.png'
+                    "https://cdn-icons-png.flaticon.com/512/431/431985.png"
                   }
                   alt="profile-img"
                   width="36px"
@@ -115,7 +110,7 @@ const AvatarDropdown = () => {
         </div>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default AvatarDropdown
+export default AvatarDropdown;

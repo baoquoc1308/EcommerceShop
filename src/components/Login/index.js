@@ -1,65 +1,61 @@
-import React, { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { fetchApi } from '../../api/api'
-import { useNavigate } from 'react-router-dom'
-import '../Login/index.scss'
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { fetchApi } from "../../api/api";
+import { useNavigate } from "react-router-dom";
+import "../Login/index.scss";
 function Login(props) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [display, setDisplay] = useState('hidden')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [display, setDisplay] = useState("hidden");
+  const navigate = useNavigate();
 
-  props.myFun(false)
-  props.myFun2(false)
+  props.myFun(false);
+  props.myFun2(false);
 
-  const handleResponseLogin = data => {
-    // Lưu trữ accessTokenvà dataUservào localStorage.
-    localStorage.setItem('accessToken', data?.token)
-    localStorage.setItem('dataUser', JSON.stringify(data))
+  const handleResponseLogin = (data) => {
+    localStorage.setItem("accessToken", data?.token);
+    localStorage.setItem("dataUser", JSON.stringify(data));
     data &&
-      toast.success('Login successfully!', {
-        position: 'top-right',
+      toast.success("Login successfully!", {
+        position: "top-right",
         autoClose: 1500,
-      })
+      });
     setTimeout(() => {
-      navigate('/')
-    }, 1500)
-  }
-  // Có lỗi xảy ra trong quá trình đăng nhập
-  const handleError = data => {
-    toast.error(data?.message || 'Something went wrong!', {
-      position: 'top-right',
+      navigate("/");
+    }, 1500);
+  };
+
+  const handleError = (data) => {
+    toast.error(data?.message || "Something went wrong!", {
+      position: "top-right",
       autoClose: 1500,
-    })
-  }
-  // Được gọi khi người dùng thực hiện đăng nhập.
+    });
+  };
+
   const handleLogin = () => {
     fetchApi(
-      'POST',
-      'https://dummyjson.com/auth',
-      'login',
+      "POST",
+      "https://dummyjson.com/auth",
+      "login",
       handleResponseLogin,
       handleError,
-      // Truyền dữ liệu usernamevà password từ trạng thái vào nội dung yêu cầu.
+
       { username: email, password: password }
-    )
-  }
-  // Được gọi khi người dùng chọn chế độ đăng ký.
+    );
+  };
+
   const register = () => {
-    // Kiểm tra nếu trạng thái "display" là 'hidden'
-    if (display === 'hidden') {
-      // Nếu là 'hidden', thì đặt trạng thái mới là 'inline-block'
-      setDisplay('inline-block')
+    if (display === "hidden") {
+      setDisplay("inline-block");
     } else {
-      // Nếu không phải 'hidden', thì đặt trạng thái mới là 'hidden'
-      setDisplay('hidden')
+      setDisplay("hidden");
     }
-  }
-  // Cuộn lên đầu trang
+  };
+
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="grid login-container">
@@ -67,9 +63,9 @@ function Login(props) {
         className={`flex flex-col  shadow-xl align-middle my-36 md:w-80 md:mx-auto rounded-xl mx-10 bg-gray-200 `}
       >
         <h2 className="text-center mt-2">
-          {display === 'hidden'
-            ? 'Not Registered?'
-            : 'Already have an account?'}
+          {display === "hidden"
+            ? "Not Registered?"
+            : "Already have an account?"}
           <span className={`text-blue-600 cursor-pointer`} onClick={register}>
             Click here
           </span>
@@ -81,14 +77,14 @@ function Login(props) {
             type="text"
             placeholder="Enter email"
             className="my-2  rounded-md w-full p-2 text-black"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <h3 className="my-2">Password</h3>
           <input
             type="password"
             placeholder="Enter password"
             className="my-2 rounded-md w-full p-2 text-black"
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {/* for registering */}
           <div className={`${display} w-full`}>
@@ -117,16 +113,16 @@ function Login(props) {
           </button>
           <h5
             className={`text-right my-2 ${
-              display === 'hidden' ? 'inline-block' : 'hidden'
+              display === "hidden" ? "inline-block" : "hidden"
             }`}
           >
-            Forgot{' '}
+            Forgot{" "}
             <span className={`text-blue-600 cursor-pointer`}>password?</span>
           </h5>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

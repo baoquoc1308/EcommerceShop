@@ -1,30 +1,26 @@
-import React from 'react'
-import { useCart } from 'react-use-cart'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import logo from '../images/logo.png'
-import { NavLink } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-import AvatarDropdown from '../Logout/index'
-import 'react-toastify/dist/ReactToastify.css'
-import '../Navbar/index.scss'
+import React from "react";
+import { useCart } from "react-use-cart";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import logo from "../images/logo.png";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import AvatarDropdown from "../Logout/index";
+import "react-toastify/dist/ReactToastify.css";
+import "../Navbar/index.scss";
 
 function Navbar() {
-  // Lấy đối tượng vị trí hiện tại chứa thông tin về URL hiện tại
-  const location = useLocation()
-  //destructuring pathname from location
-  const { pathname } = location
-  // Sử dụng phương thức split của Javascript để lấy tên đường dẫn trong mảng
-  const splitLocation = pathname.split('/')
-  const { totalUniqueItems } = useCart()
-  // lấy accessToken từ bộ nhớ cục bộ.
-  const token = localStorage.getItem('accessToken')
+  const location = useLocation();
+  const { pathname } = location;
+  const splitLocation = pathname.split("/");
+  const { totalUniqueItems } = useCart();
+  const token = localStorage.getItem("accessToken");
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Sử dụng hiệu ứng trơn tru
-    })
-  }
+      behavior: "smooth",
+    });
+  };
 
   return (
     <nav className="flex flex-col fixed  top-0  min-w-full shadow-md z-50">
@@ -37,38 +33,38 @@ function Navbar() {
           <NavLink to="/" className="mx-6">
             <li
               className={`hover:border-b-2 border-cyan-600 ${
-                splitLocation[1] === '' ? 'border-b-2' : ''
+                splitLocation[1] === "" ? "border-b-2" : ""
               }`}
             >
-              Home{' '}
+              Home{" "}
             </li>
           </NavLink>
           <NavLink to="/collection" className="mx-6">
             <li
               className={`hover:border-b-2 border-cyan-600 active:border-b-2 ${
-                splitLocation[1] === 'collection' ? 'border-b-2' : ''
+                splitLocation[1] === "collection" ? "border-b-2" : ""
               } `}
             >
-              Collection{' '}
+              Collection{" "}
             </li>
           </NavLink>
           <NavLink to="/contact" className="mx-6">
             <li
               className={`hover:border-b-2 border-cyan-600 ${
-                splitLocation[1] === 'contact' ? 'border-b-2' : ''
+                splitLocation[1] === "contact" ? "border-b-2" : ""
               }`}
             >
-              Contact{' '}
+              Contact{" "}
             </li>
           </NavLink>
 
           <NavLink to="/checkout" className="mx-6">
             <li
               className={`hover:border-b-2 border-cyan-600 ${
-                splitLocation[1] === 'order' ? 'border-b-2' : ''
+                splitLocation[1] === "order" ? "border-b-2" : ""
               }`}
             >
-              Order{' '}
+              Order{" "}
             </li>
           </NavLink>
         </ul>
@@ -88,17 +84,17 @@ function Navbar() {
           <NavLink to="/login" className="mx-6">
             <li
               className={`hover:border-b-2 border-cyan-600 active:border-b-2 text-lg mt-1${
-                splitLocation[1] === 'login' ? 'border-b-2' : ''
+                splitLocation[1] === "login" ? "border-b-2" : ""
               } `}
             >
-              Login{' '}
+              Login{" "}
             </li>
           </NavLink>
         ) : (
           <>
             <li
               className={`hover:border-b-2 border-cyan-600 active:border-b-2 ${
-                splitLocation[1] === 'login' ? 'border-b-2' : ''
+                splitLocation[1] === "login" ? "border-b-2" : ""
               } `}
             >
               <AvatarDropdown />
@@ -107,7 +103,7 @@ function Navbar() {
         )}
       </ul>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

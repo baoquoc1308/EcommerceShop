@@ -1,77 +1,76 @@
-import React from 'react'
-import { useRef, useState, useEffect } from 'react'
-import { fetchApi } from '../../api/api'
-import { useCart } from 'react-use-cart'
-import collection1 from '../images/smartphone-collection.jpg'
-import collection2 from '../images/laptops-collection.jpg'
-import collection3 from '../images/manswatches-collection.jpg'
-import collection4 from '../images/womenswatches-collection.jpg'
-import ScrollAnimation from 'react-animate-on-scroll'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css' // Import Toastify styles
-import { Link, useNavigate } from 'react-router-dom'
-import '../Collection/index.scss'
-import { Rate } from 'antd'
-import { formatNumber } from '../../utils'
+import React from "react";
+import { useRef, useState, useEffect } from "react";
+import { fetchApi } from "../../api/api";
+import { useCart } from "react-use-cart";
+import collection1 from "../images/smartphone-collection.jpg";
+import collection2 from "../images/laptops-collection.jpg";
+import collection3 from "../images/manswatches-collection.jpg";
+import collection4 from "../images/womenswatches-collection.jpg";
+import ScrollAnimation from "react-animate-on-scroll";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../Collection/index.scss";
+import { Rate } from "antd";
+import { formatNumber } from "../../utils";
 
 function Collection(props) {
-  const { addItem } = useCart()
-  // Tạo một ref để truy cập DOM element, được sử dụng để cuộn tới vị trí của phần tử khi click.
-  const ref = useRef(null)
-  //  cuộn tới phần tử được tham chiếu bởi ref với hiệu ứng mượt (smooth scroll).
+  const { addItem } = useCart();
+
+  const ref = useRef(null);
+
   const handleClick = () => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-  const [category, setcategory] = useState('')
-  const [products, setProducts] = useState([])
-  const navigate = useNavigate()
-  // Lấy token từ localStorage, giả sử để kiểm tra xem người dùng đã đăng nhập hay chưa.
-  const token = localStorage.getItem('accessToken')
-  // Hàm xử lý khi dữ liệu về từ API thành công, cập nhật danh sách sản phẩm.
-  const handleResponseGetCategoryProducts = data => {
-    setProducts(data)
-  }
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  const [category, setcategory] = useState("");
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("accessToken");
+
+  const handleResponseGetCategoryProducts = (data) => {
+    setProducts(data);
+  };
   const handleError = () => {
-    toast.error('Something went wrong!', {
-      position: 'top-right',
+    toast.error("Something went wrong!", {
+      position: "top-right",
       autoClose: 1500,
-    })
-  }
-  // lấy danh sách sản phẩm dựa trên danh mục (collection), và sau đó cuộn tới vị trí của phần tử được tham chiếu bởi ref.
-  const handleGetCategoryProducts = collection => {
-    // Cập nhật state category với giá trị mới là collection, để theo dõi danh mục sản phẩm hiện tại.
-    setcategory(collection)
-    handleClick()
+    });
+  };
+
+  const handleGetCategoryProducts = (collection) => {
+    setcategory(collection);
+    handleClick();
     fetchApi(
-      'GET',
-      'https://dummyjson.com',
+      "GET",
+      "https://dummyjson.com",
       `products/category/${collection}`,
-      // cập nhật state products.
+
       handleResponseGetCategoryProducts,
       handleError
-    )
-  }
+    );
+  };
 
   const notifySuccess = () => {
-    toast('Product added to cart', {
+    toast("Product added to cart", {
       position: toast.POSITION.TOP_RIGHT,
-    })
-  }
-  // Hiển thị thông báo lỗi, và nếu có lỗi xác thực (chưa đăng nhập), chuyển hướng người dùng tới trang đăng nhập
+    });
+  };
+
   const notifyError = () => {
     setTimeout(() => {
-      navigate('/login')
-    }, 500)
-    toast.error('Please login account user!', {
+      navigate("/login");
+    }, 500);
+    toast.error("Please login account user!", {
       position: toast.POSITION.TOP_RIGHT,
-    })
-  }
+    });
+  };
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
-  props.myFun(false)
-  props.myFun2(true)
+  props.myFun(false);
+  props.myFun2(true);
 
   return (
     <div className=" my-20">
@@ -79,7 +78,7 @@ function Collection(props) {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div
             className="mx-4 my-4  cursor-pointer"
-            onClick={() => handleGetCategoryProducts('smartphones')}
+            onClick={() => handleGetCategoryProducts("smartphones")}
           >
             <img
               src={collection1}
@@ -93,7 +92,7 @@ function Collection(props) {
 
           <div
             className="mx-4 my-4 cursor-pointer "
-            onClick={() => handleGetCategoryProducts('laptops')}
+            onClick={() => handleGetCategoryProducts("laptops")}
           >
             <img
               src={collection2}
@@ -107,7 +106,7 @@ function Collection(props) {
 
           <div
             className="mx-4 my-4 cursor-pointer "
-            onClick={() => handleGetCategoryProducts('mens-watches')}
+            onClick={() => handleGetCategoryProducts("mens-watches")}
           >
             <img
               src={collection3}
@@ -120,7 +119,7 @@ function Collection(props) {
           </div>
           <div
             className="mx-4 my-4 cursor-pointer "
-            onClick={() => handleGetCategoryProducts('womens-watches')}
+            onClick={() => handleGetCategoryProducts("womens-watches")}
           >
             <img
               src={collection4}
@@ -141,7 +140,7 @@ function Collection(props) {
         {category}
       </h1>
       <div className="collection my-5 mx-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-5 ">
-        {products?.products?.map(element => {
+        {products?.products?.map((element) => {
           return (
             <ScrollAnimation
               animateIn="fadeIn"
@@ -204,13 +203,13 @@ function Collection(props) {
                   id="add"
                   onClick={() => {
                     if (token !== null) {
-                      addItem(element)
-                      toast.success('Product added to cart', {
-                        position: 'top-right',
+                      addItem(element);
+                      toast.success("Product added to cart", {
+                        position: "top-right",
                         autoClose: 500,
-                      })
+                      });
                     } else {
-                      notifyError()
+                      notifyError();
                     }
                   }}
                 >
@@ -219,11 +218,11 @@ function Collection(props) {
                 <ToastContainer autoClose={1500} />
               </div>
             </ScrollAnimation>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-export default Collection
+export default Collection;
