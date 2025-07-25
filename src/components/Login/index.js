@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { fetchApi } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import "../Login/index.scss";
+import { useNotification } from "../Notification";
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [display, setDisplay] = useState("hidden");
   const navigate = useNavigate();
-
+  const notification = useNotification();
   props.myFun(false);
   props.myFun2(false);
 
   const handleResponseLogin = (data) => {
     localStorage.setItem("accessToken", data?.token);
     localStorage.setItem("dataUser", JSON.stringify(data));
-    data &&
-      toast.success("Login successfully!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+    data && notification.success("Login successfully!", 3000);
     setTimeout(() => {
       navigate("/");
     }, 1500);
   };
 
   const handleError = (data) => {
-    toast.error(data?.message || "Something went wrong!", {
-      position: "top-right",
-      autoClose: 1500,
-    });
+    notification.error(data?.message || "Something went wrong!", 3000);
   };
 
   const handleLogin = () => {
@@ -52,10 +44,6 @@ function Login(props) {
       setDisplay("hidden");
     }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="grid login-container">

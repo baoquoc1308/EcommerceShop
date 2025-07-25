@@ -1,17 +1,17 @@
-import React from 'react'
-import '../Footer/index.scss'
+import React from "react";
+import "../Footer/index.scss";
 import {
   FaPiggyBank,
   FaShippingFast,
   FaHeadphonesAlt,
   FaWallet,
-} from 'react-icons/fa'
+} from "react-icons/fa";
 import {
   AiFillFacebook,
   AiOutlineInstagram,
   AiFillTwitterCircle,
   AiFillGithub,
-} from 'react-icons/ai'
+} from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -120,15 +120,15 @@ const Footer = () => {
 
             <div className="infor">
               <h1>
-                &copy; 2023 <b>Ecommerce Shop</b> <br />
-                &reg; All right reserved{' '}
+                &copy; 2025 <b>Ecommerce Shop</b> <br />
+                &reg; All right reserved{" "}
               </h1>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

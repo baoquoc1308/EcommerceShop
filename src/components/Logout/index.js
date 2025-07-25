@@ -5,13 +5,11 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Dropdown, Modal } from "antd";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
-
+import { useNotification } from "../Notification";
 const AvatarDropdown = () => {
   const [isConfirmLogout, setIsConfirmLogout] = useState(false);
-
+  const notification = useNotification();
   const accessToken = localStorage.getItem("accessToken");
   const dataUser = localStorage.getItem("dataUser");
 
@@ -26,9 +24,7 @@ const AvatarDropdown = () => {
       localStorage.removeItem("storedOrders");
       localStorage.removeItem("dataUser");
       localStorage.removeItem("infoOrder");
-      toast.success("Logged out successfully!", {
-        position: "top-right",
-      });
+      notification.success("Logged out successfully!", 3000);
 
       setIsConfirmLogout(false);
     }
@@ -44,9 +40,6 @@ const AvatarDropdown = () => {
   const handleCancel = () => {
     setIsConfirmLogout(false);
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>

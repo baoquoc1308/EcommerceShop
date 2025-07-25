@@ -1,39 +1,56 @@
-import Products from './components/Products'
-import Navbar from './components/Navbar'
-import { useState } from 'react'
-import ProductDetails from './components/ProductDetails/index'
-import { Routes, Route } from 'react-router-dom'
-import Cart from './components/Cart'
-import { CartProvider } from 'react-use-cart'
-import Footer from './components/Footer/index'
-import Collection from './components/Collection'
-import Login from './components/Login'
-import Checkout from './components/Checkout'
-import CheckoutForm from './components/CheckoutForm'
-import Contact from './components/Contact'
-import Slider from './components/Slider'
+import Products from "./components/Products";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
+import ProductDetails from "./components/ProductDetails/index";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Cart from "./components/Cart";
+import { CartProvider } from "react-use-cart";
+import Footer from "./components/Footer/index";
+import SpecialDeals from "./components/SpecialDeals";
+import Blog from "./components/Blog";
+import BlogPost from "./components/BlogPost";
+import Login from "./components/Login";
+import Checkout from "./components/Checkout";
+import CheckoutForm from "./components/CheckoutForm";
+import Contact from "./components/Contact";
+import Slider from "./components/Slider";
+import {
+  NotificationProvider,
+  NotificationContainer,
+  useNotification,
+} from "./components/Notification";
 
 function App() {
-  const [showSlide, setshowSlide] = useState(false)
-  const [showFooter, setshowFooter] = useState(true)
-  const [Mode, setMode] = useState('light')
+  const location = useLocation();
+  const [showSlide, setshowSlide] = useState(false);
+  const [showFooter, setshowFooter] = useState(true);
+  const [Mode, setMode] = useState("light");
+  const notification = useNotification();
+
+  // Chỉ hiển thị slider ở trang home
+  const isHomePage = location.pathname === "/" && showSlide;
 
   const setDarkLight = () => {
-    if (Mode === 'light') {
-      setMode('dark')
-      document.body.style.backgroundColor = 'black'
+    if (Mode === "light") {
+      setMode("dark");
+      document.body.style.backgroundColor = "black";
     } else {
-      setMode('light')
-      document.body.style.backgroundColor = 'rgb(203 ,213 ,225) '
+      setMode("light");
+      document.body.style.backgroundColor = "rgb(203 ,213 ,225) ";
     }
-  }
+  };
 
   return (
     <>
+      <NotificationContainer
+        notifications={notification.notifications}
+        removeNotification={notification.removeNotification}
+      />
       <CartProvider>
         <Navbar toggleMode={setDarkLight} mode={Mode} />
 
-        {showSlide && <Slider mode={Mode} />}
+        {/* Slider chỉ hiển thị ở trang home */}
+        {isHomePage && <Slider mode={Mode} />}
 
         <Routes>
           <Route
@@ -64,9 +81,25 @@ function App() {
             }
           />
           <Route
-            path="/collection"
+            path="/special-deals"
             element={
-              <Collection
+              <SpecialDeals
+                mode={Mode}
+                myFun={setshowSlide}
+                myFun2={setshowFooter}
+              />
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <Blog mode={Mode} myFun={setshowSlide} myFun2={setshowFooter} />
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <BlogPost
                 mode={Mode}
                 myFun={setshowSlide}
                 myFun2={setshowFooter}
@@ -113,7 +146,7 @@ function App() {
       </CartProvider>
       {showFooter && <Footer mode={Mode} />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

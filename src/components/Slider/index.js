@@ -4,6 +4,7 @@ import Slidercomponent from "./SliderComponent";
 import image1 from "../images/1.jpg";
 import image2 from "../images/2.jpg";
 import image3 from "../images/4.jpg";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Circle = (props) => {
   return (
@@ -67,14 +68,18 @@ const Slider = () => {
           <Circle key={i} active={slider} id={i + 1} />
         ))}
       </div>
-      <div className="slider-btn">
-        <div className="left-btn">
-          <button onClick={prevSlide}>{"←"}</button>
-        </div>
-        <div className="right-btn">
-          <button onClick={nextSlide}>{"→"}</button>
-        </div>
-      </div>
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg z-10"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg z-10"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
     </div>
   );
 };

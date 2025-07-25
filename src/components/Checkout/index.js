@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Space, Table, Avatar, Modal, Image } from "antd";
 import { QuestionCircleTwoTone } from "@ant-design/icons";
 import "../Checkout/index.scss";
-import { formatNumber } from "../../utils";
-import { toast } from "react-toastify";
-
+import { useNotification } from "../Notification";
 const Checkout = (props) => {
   const dataJSON = localStorage.getItem("storedOrders");
   const dataOrder = dataJSON ? JSON.parse(dataJSON) : [];
@@ -12,7 +10,7 @@ const Checkout = (props) => {
   const [order, setOrder] = useState(dataOrder);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
-
+  const notification = useNotification();
   const showModal = (id) => {
     setProductIdToDelete(id);
     setIsModalVisible(true);
@@ -42,10 +40,7 @@ const Checkout = (props) => {
       localStorage.setItem("storedOrders", JSON.stringify(updatedData));
 
       setIsModalVisible(false);
-      toast.success("Đã xóa thành công đơn hàng!", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 1000,
-      });
+      notification.success("Order deleted successfully!", 3000);
     }
   };
 
@@ -87,13 +82,10 @@ const Checkout = (props) => {
       render: (_, record) => {
         return (
           <a>
-            ₫
-            {formatNumber(
+            {record?.price -
               Math.round(
-                record?.price -
-                  (record?.price * record?.discountPercentage) / 100
-              ) * 23000
-            )}
+                (record?.price * record?.discountPercentage) / 100
+              ).toFixed(2)}
           </a>
         );
       },
@@ -117,15 +109,8 @@ const Checkout = (props) => {
       render: (_, record) => {
         return (
           <a>
-            ₫
-            {formatNumber(
-              Math.round(
-                record?.price -
-                  (record?.price * record?.discountPercentage) / 100
-              ) *
-                23000 *
-                record?.quantity
-            )}
+            {record?.price -
+              Math.round((record?.price * record?.discountPercentage) / 100)}
           </a>
         );
       },
@@ -144,7 +129,6 @@ const Checkout = (props) => {
   ];
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     props.myFun(false);
     props.myFun2(true);
   }, []);

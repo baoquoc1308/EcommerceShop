@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../CheckoutForm/index.scss";
 import { Button, Input } from "antd";
 import { Form } from "antd";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
-
+import { useNotification } from "../Notification";
 const CheckoutForm = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { emptyCart, clearCartMetadata } = useCart();
-
+  const notification = useNotification();
   const infoUserJSON = localStorage.getItem("infoOrder");
 
   const infoUser = JSON.parse(infoUserJSON);
@@ -60,24 +58,16 @@ const CheckoutForm = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     !!infoUser &&
       reload &&
-      toast.success(
-        "Bạn đã có thông tin cá nhân, bạn có muốn thay đổi không?",
-        {
-          position: "top-right",
-          autoClose: 1500,
-        }
+      notification.success(
+        "You already have personal information, do you want to change it?",
+        3000
       );
 
     infoUser === null &&
       reload &&
-      toast.warning("Vui lòng nhập thông tin cá nhân.", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      notification.warning("Please enter personal information.", 3000);
   }, [reload]);
 
   useEffect(() => {
@@ -86,10 +76,7 @@ const CheckoutForm = () => {
 
   const handleOnFinish = (values) => {
     localStorage.setItem("infoOrder", JSON.stringify(values));
-    toast.success("Mua hàng thành công!", {
-      position: "top-right",
-      autoClose: 1500,
-    });
+    notification.success("Purchase successful!", 3000);
 
     setTimeout(() => {
       navigate("/checkout");

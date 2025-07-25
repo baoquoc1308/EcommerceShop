@@ -1,4 +1,13 @@
-.contact-page-container {
+.blog-container {
+  .blog-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+  }
+
   .hero-section {
     position: relative;
     overflow: hidden;
@@ -30,20 +39,14 @@
   }
 }
 
-// Remove old styles and improve responsiveness
 @media (max-width: 768px) {
-  .contact-page-container {
+  .blog-container {
     .hero-section {
       padding: 2rem 0;
 
       h1 {
         font-size: 2.5rem !important;
       }
-    }
-
-    .grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
     }
   }
 }

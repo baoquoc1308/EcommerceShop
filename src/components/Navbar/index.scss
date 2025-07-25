@@ -1,0 +1,39 @@
+.navbar-container {
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.navbar-content {
+  position: relative;
+}
+
+// Smooth animation cho mobile menu
+@media (max-width: 768px) {
+  .navbar-container {
+    .mobile-menu {
+      animation: slideDown 0.3s ease-out;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Cải thiện responsive
+@media (max-width: 640px) {
+  .navbar-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -4,7 +4,7 @@
   overflow: hidden;
   position: relative;
   relative &:after {
-    content: '...';
+    content: "...";
     position: relative;
     bottom: 0;
     right: 0;
@@ -18,13 +18,14 @@
 
   .number-discount {
     display: block;
+    border-radius: 8px;
     padding: 0.125rem 0.25rem;
     background-color: #ffe97a;
     border-bottom-left-radius: 0.125rem;
 
     .percent {
       display: block;
-      color: #ec3814;
+      color: #e9f542;
       font-size: 0.75rem;
       line-height: 0.875rem;
       font-weight: 500;
@@ -57,11 +58,11 @@
     margin-left: 1rem;
     .unit-price {
       font-size: 0.75rem;
-      color: #ee4d2d;
+      color: red;
     }
     .num-new-price {
       font-size: 16px;
-      color: #ee4d2d;
+      color: red;
     }
   }
 }

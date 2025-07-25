@@ -1,0 +1,44 @@
+.special-deals-container {
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="30" opacity="0.1">💰</text></svg>')
+        repeat;
+      animation: float 20s infinite linear;
+    }
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .special-deals-container {
+    .hero-section {
+      padding: 2rem 0;
+
+      h1 {
+        font-size: 2.5rem !important;
+      }
+
+      p {
+        font-size: 1.2rem !important;
+      }
+    }
+  }
+}
