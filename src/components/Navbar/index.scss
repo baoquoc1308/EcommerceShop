@@ -10,7 +10,6 @@
   position: relative;
 }
 
-// Smooth animation cho mobile menu
 @media (max-width: 768px) {
   .navbar-container {
     .mobile-menu {
@@ -30,7 +29,6 @@
   }
 }
 
-// Cải thiện responsive
 @media (max-width: 640px) {
   .navbar-content {
     padding-left: 1rem;

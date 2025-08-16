@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useCart } from "react-use-cart";
 import { Link, useNavigate } from "react-router-dom";
-import { Rate, BackTop } from "antd";
+import { Rate } from "antd";
 import "../ProductItems/index.scss";
 import { ShoppingCart } from "lucide-react";
 import { useNotification } from "../Notification";
@@ -9,7 +9,6 @@ import { useNotification } from "../Notification";
 const ProductItems = (props) => {
   const notification = useNotification();
 
-  const [showBackTop, setShowBackTop] = useState(false);
 
   const { addItem } = useCart();
   const navigate = useNavigate();
@@ -34,16 +33,9 @@ const ProductItems = (props) => {
   const handleAddItem = () => {
     token !== null ? notifySuccess() : notifyError();
   };
-  const handleScroll = () => {
-    setShowBackTop(window.scrollY > 300);
-  };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+
+
   return (
     <>
       <div className="bg-white shadow-lg rounded-2xl p-4 flex flex-col transition-all w-full max-w-xs mx-auto">
@@ -106,11 +98,7 @@ const ProductItems = (props) => {
           Add to Cart
         </button>
 
-        {showBackTop && (
-          <BackTop visibilityHeight={300}>
-            <div className="ant-back-top-inner">↑</div>
-          </BackTop>
-        )}
+      
       </div>
     </>
   );

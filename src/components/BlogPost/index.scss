@@ -4,7 +4,6 @@
     line-height: 1.8;
     color: #2d3748;
 
-    // Headings
     h1,
     h2,
     h3,
@@ -49,7 +48,6 @@
       font-weight: 600;
     }
 
-    // Paragraphs
     p {
       @apply mb-6 text-lg leading-relaxed;
       text-align: justify;
@@ -63,7 +61,6 @@
       }
     }
 
-    // Lists
     ul,
     ol {
       @apply mb-6 pl-0;
@@ -98,7 +95,6 @@
       counter-reset: list-counter;
     }
 
-    // Nested lists
     ul ul,
     ol ol,
     ul ol,
@@ -113,7 +109,6 @@
       }
     }
 
-    // Strong and emphasis
     strong,
     b {
       @apply font-bold text-gray-900;
@@ -127,7 +122,7 @@
       @apply italic text-blue-700;
     }
 
-    // Links
+    
     a {
       @apply text-blue-600 hover:text-blue-800 underline decoration-2 underline-offset-2;
       transition: all 0.2s ease;
@@ -140,7 +135,7 @@
       }
     }
 
-    // Blockquotes
+    
     blockquote {
       @apply border-l-4 border-blue-500 pl-6 py-4 my-8 bg-blue-50 rounded-r-lg;
       position: relative;
@@ -164,7 +159,7 @@
       }
     }
 
-    // Code
+    
     code {
       @apply bg-gray-100 text-red-600 px-2 py-1 rounded text-sm font-mono;
       border: 1px solid #e5e7eb;
@@ -178,13 +173,13 @@
       }
     }
 
-    // Images
+    
     img {
       @apply rounded-lg shadow-lg my-8 mx-auto max-w-full;
       border: 1px solid #e5e7eb;
     }
 
-    // Tables
+    
     table {
       @apply w-full border-collapse my-8;
 
@@ -202,12 +197,12 @@
       }
     }
 
-    // Horizontal rule
+    
     hr {
       @apply my-12 border-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent;
     }
 
-    // Special formatting for key sections
+    
     .key-points {
       @apply bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200 my-8;
 
@@ -220,7 +215,7 @@
       }
     }
 
-    // Conclusion styling
+    
     .conclusion {
       @apply bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200 mt-12;
 
@@ -239,7 +234,7 @@
     overflow: hidden;
   }
 
-  // Reading progress bar
+  
   .reading-progress {
     position: fixed;
     top: 0;

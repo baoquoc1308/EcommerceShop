@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   Calendar,
-  User,
-  Tag,
   ArrowLeft,
   Heart,
   MessageCircle,
@@ -39,7 +37,6 @@ function BlogPost(props) {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [showTableOfContents, setShowTableOfContents] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const foundPost = blogPostsData.find((p) => p.slug === slug);
@@ -114,6 +111,8 @@ function BlogPost(props) {
         setCopySuccess(true);
         setTimeout(() => setCopySuccess(false), 2000);
         break;
+      default:
+        break
     }
     setShowShareMenu(false);
   };
@@ -189,7 +188,7 @@ function BlogPost(props) {
 
   return (
     <div className="blog-post-container min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 pt-20">
-      {/* Reading Progress Bar */}
+      
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
         <div
           className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out"
@@ -197,7 +196,7 @@ function BlogPost(props) {
         />
       </div>
 
-      {/* Floating Action Buttons */}
+      
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 space-y-3 hidden lg:block">
         <button
           onClick={handleLike}
@@ -274,7 +273,7 @@ function BlogPost(props) {
       </div>
 
       <div className="max-w-4xl mx-auto px-4">
-        {/* Navigation Breadcrumb */}
+        
         <div className="flex items-center text-sm text-gray-600 mb-8 space-x-2">
           <Link
             to="/"
@@ -293,7 +292,7 @@ function BlogPost(props) {
           <span className="text-gray-400">{post.category}</span>
         </div>
 
-        {/* Back Button */}
+        
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate("/blog")}
@@ -303,7 +302,7 @@ function BlogPost(props) {
             <span>Back to Blog</span>
           </button>
 
-          {/* Mobile Table of Contents Toggle */}
+          
           <button
             onClick={() => setShowTableOfContents(!showTableOfContents)}
             className="lg:hidden flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-300"
@@ -318,10 +317,10 @@ function BlogPost(props) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
+          
           <div className="lg:col-span-3">
             <article className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Hero Image */}
+              
               <div className="relative h-64 md:h-96">
                 <img
                   src={post.image}
@@ -350,7 +349,7 @@ function BlogPost(props) {
                 </div>
               </div>
 
-              {/* Article Header */}
+              
               <div className="p-6 md:p-8 border-b border-gray-100">
                 <div className="flex flex-wrap items-center gap-4 mb-4">
                   <div className="flex items-center space-x-3">
@@ -385,7 +384,7 @@ function BlogPost(props) {
                   </div>
                 </div>
 
-                {/* Tags */}
+                
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.map((tag, index) => (
                     <span
@@ -397,7 +396,7 @@ function BlogPost(props) {
                   ))}
                 </div>
 
-                {/* Social Stats */}
+                
                 <div className="flex items-center space-x-6 pt-4 border-t border-gray-100">
                   <button
                     onClick={handleLike}
@@ -426,10 +425,10 @@ function BlogPost(props) {
                 </div>
               </div>
 
-              {/* Article Content */}
+              
               <div className="p-6 md:p-8">
                 <div className="blog-content prose prose-lg max-w-none">
-                  {/* Introduction */}
+                  
                   {post.content.introduction && (
                     <div className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
                       <p className="text-lg leading-relaxed text-gray-700 mb-0 font-medium">
@@ -438,7 +437,7 @@ function BlogPost(props) {
                     </div>
                   )}
 
-                  {/* Main Sections */}
+                  
                   {post.content.sections?.map((section, index) => (
                     <div key={section.id} id={section.id} className="mb-8">
                       <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b-2 border-gray-200">
@@ -459,7 +458,7 @@ function BlogPost(props) {
                     </div>
                   ))}
 
-                  {/* Conclusion */}
+                  
                   {post.content.conclusion && (
                     <div className="mt-12 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
                       <h3 className="text-xl font-bold text-green-800 mb-4">
@@ -471,7 +470,7 @@ function BlogPost(props) {
                     </div>
                   )}
 
-                  {/* Action Items */}
+                  
                   {post.content.actionItems && (
                     <div className="mt-8 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-l-4 border-yellow-500">
                       <h3 className="text-xl font-bold text-yellow-800 mb-4">
@@ -495,13 +494,13 @@ function BlogPost(props) {
             </article>
           </div>
 
-          {/* Sidebar */}
+          
           <div
             className={`lg:col-span-1 space-y-6 ${
               showTableOfContents ? "block" : "hidden lg:block"
             }`}
           >
-            {/* Table of Contents */}
+            
             {tableOfContents.length > 0 && (
               <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
                 <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
@@ -530,7 +529,7 @@ function BlogPost(props) {
               </div>
             )}
 
-            {/* Author Card */}
+            
             <div className="bg-white rounded-xl shadow-lg p-6">
               <div className="text-center">
                 <img
@@ -548,7 +547,7 @@ function BlogPost(props) {
               </div>
             </div>
 
-            {/* Share Widget */}
+            
             <div className="bg-white rounded-xl shadow-lg p-6 lg:hidden">
               <h3 className="font-semibold text-gray-800 mb-4">
                 Share this article
@@ -587,7 +586,7 @@ function BlogPost(props) {
           </div>
         </div>
 
-        {/* Related Posts */}
+        
         {relatedPosts.length > 0 && (
           <section className="mt-16 mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import ProductItems from "../ProductItems";
 import Spinner from "../Spinner";
 import { fetchApi } from "../../api/api";
 import { useNotification } from "../Notification";
-import { Percent, TrendingDown, Star, Clock, Flame } from "lucide-react";
+import { Percent, TrendingDown, Star, Clock } from "lucide-react";
 import "./index.scss";
 
 function SpecialDeals(props) {
@@ -14,7 +14,6 @@ function SpecialDeals(props) {
   const [allProducts, setAllProducts] = useState({ products: [] });
   const [loading, setLoading] = useState(false);
 
-  // Tính toán products có discount cao nhất
   const specialDealsProducts = useMemo(() => {
     if (!allProducts?.products?.length) {
       return [];
@@ -25,18 +24,12 @@ function SpecialDeals(props) {
         ...product,
         discountAmount: product.discountPercentage || 0,
       }))
-      .filter((product) => product.discountAmount > 10) // Chỉ lấy sản phẩm có discount > 10%
-      .sort((a, b) => b.discountAmount - a.discountAmount) // Sort theo discount giảm dần
-      .slice(0, 20); // Lấy 20 sản phẩm đầu
+      .filter((product) => product.discountAmount > 10) 
+      .sort((a, b) => b.discountAmount - a.discountAmount) 
+      .slice(0, 20); 
   }, [allProducts]);
 
-  const handleResponseGetAllProducts = (data) => {
-    if (!data || !data.products || !Array.isArray(data.products)) {
-      console.error("Invalid data structure:", data);
-      setLoading(false);
-      return;
-    }
-
+  const handleResponseGetAllProducts = useCallback((data) => {
     const filtered = {
       ...data,
       products: data.products.filter(
@@ -51,15 +44,15 @@ function SpecialDeals(props) {
     };
     setAllProducts(filtered);
     setLoading(false);
-  };
+  }, []);
 
-  const handleError = (data) => {
+  const handleError = useCallback((data) => {
     console.error("API Error:", data);
     notification.error(data?.message || "Something went wrong!", 3000);
     setLoading(false);
-  };
+  }, [notification]);
 
-  const fetchAllProducts = () => {
+  const fetchAllProducts = useCallback(() => {
     setLoading(true);
     fetchApi(
       "GET",
@@ -68,13 +61,11 @@ function SpecialDeals(props) {
       handleResponseGetAllProducts,
       handleError
     );
-  };
+  }, [handleResponseGetAllProducts, handleError]);
 
   useEffect(() => {
     fetchAllProducts();
-  }, []);
-
-  // Tính toán thống kê
+  }, [fetchAllProducts]);
   const stats = useMemo(() => {
     if (!specialDealsProducts.length) return {};
 
@@ -94,7 +85,6 @@ function SpecialDeals(props) {
 
   return (
     <div className="special-deals-container min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 pt-20">
-      {/* Hero Section */}
       <div className="hero-section bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white py-16 mb-8">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center mb-4">
@@ -128,7 +118,6 @@ function SpecialDeals(props) {
         </div>
       </div>
 
-      {/* Products Section */}
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
@@ -147,7 +136,6 @@ function SpecialDeals(props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {specialDealsProducts.map((product, index) => (
               <div key={product.id} className="relative group">
-                {/* Badge for top deals */}
                 {index < 3 && (
                   <div className="absolute -top-2 -left-2 z-10 bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
                     #{index + 1} HOT 🔥

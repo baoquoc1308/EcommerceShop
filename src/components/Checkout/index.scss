@@ -5,23 +5,228 @@
   font-weight: 600;
   margin-bottom: 20px;
 }
+
 .table-list th,
 .table-list td {
   text-align: center !important;
 }
-.modal-delete {
+
+
+.delete-order-btn {
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  }
+  
+  &:active {
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+  }
+  
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  &:active::before {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+.delete-order-modal {
+  .ant-modal-content {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .ant-modal-body {
+    padding: 0;
+  }
+  
+  .ant-modal-close {
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .ant-modal-close-x {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 16px;
+    color: #6b7280;
+  }
+  
+  
+  p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+
+.ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  
+  &.h-11 {
+    height: 44px !important;
+    min-width: 120px;
+  }
 }
-.modal-delete__icon {
-  margin-right: 10px;
+
+
+.ant-btn-default {
+  border: 2px solid #d1d5db !important;
+  background: white !important;
+  color: #374151 !important;
+  
+  &:hover {
+    border-color: #9ca3af !important;
+    background: #f9fafb !important;
+    color: #1f2937 !important;
+  }
+  
+  &:focus {
+    border-color: #6b7280 !important;
+    box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.2) !important;
+  }
 }
-.ant-space-item button {
-  padding: 10px 20px;
-  color: black;
-  background-color: rgb(240, 143, 143);
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+
+
+.ant-btn-primary.ant-btn-dangerous {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+  color: white !important;
+  
+  &:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+  }
+  
+  &:not(:disabled):not(.ant-btn-disabled):active {
+    background: linear-gradient(135deg, #b91c1c, #991b1b) !important;
+  }
+}
+
+
+.ant-btn-loading {
+  pointer-events: none;
+  
+  .ant-btn-loading-icon {
+    margin-right: 8px;
+  }
+  
+  
+  .lucide {
+    display: none;
+  }
+}
+
+
+.ant-btn .lucide {
+  flex-shrink: 0;
+}
+
+
+.text-center {
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+
+.table-list .ant-table-tbody > tr {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #f8fafc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delete-order-modal .ant-modal-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+@media (max-width: 768px) {
+  .delete-order-modal {
+    margin: 16px;
+    
+    .ant-modal-content {
+      margin: 0;
+    }
+    
+    
+    .flex.gap-3 {
+      flex-direction: column;
+      
+      .ant-btn {
+        min-width: 100%;
+      }
+    }
+  }
+  
+  .delete-order-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }

@@ -30,20 +30,259 @@
   }
 }
 
-// Remove old styles and improve responsiveness
+.contact-content-grid {
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    
+    > div {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.contact-form-container {
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.map-container-wrapper {
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .map-header {
+    flex-shrink: 0;
+  }
+  
+  .map-iframe-container {
+    flex: 1;
+    min-height: 420px; // Match approximate form content height
+    
+    @media (max-width: 1023px) {
+      height: 20rem;
+    }
+    
+    @media (max-width: 768px) {
+      height: 16rem;
+    }
+    
+    @media (max-width: 480px) {
+      height: 14rem;
+    }
+  }
+  
+  .map-info {
+    flex-shrink: 0;
+  }
+}
+
+.contact-form {
+  .form-field {
+    margin-bottom: 1rem;
+    
+    @media (max-width: 768px) {
+      margin-bottom: 0.75rem;
+    }
+  }
+  
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+    
+    @media (max-width: 768px) {
+      font-size: 0.75rem;
+    }
+  }
+  
+  .form-input {
+    height: 2.5rem;
+    font-size: 0.875rem;
+    
+    @media (max-width: 768px) {
+      height: 2.25rem;
+      font-size: 0.75rem;
+    }
+  }
+  
+  .form-textarea {
+    min-height: 4.5rem; // 3 rows
+    max-height: 4.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    
+    @media (max-width: 768px) {
+      min-height: 4rem;
+      max-height: 4rem;
+      font-size: 0.75rem;
+    }
+  }
+  
+  .form-error {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    
+    @media (max-width: 768px) {
+      font-size: 0.625rem;
+    }
+  }
+}
+
+.submit-button {
+  height: 2.75rem;
+  font-size: 0.875rem;
+  
+  @media (max-width: 768px) {
+    height: 2.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+.map-section {
+  .map-header {
+    padding: 1rem;
+    
+    @media (max-width: 768px) {
+      padding: 0.75rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      
+      @media (max-width: 768px) {
+        font-size: 1.125rem;
+      }
+    }
+    
+    p {
+      font-size: 0.875rem;
+      
+      @media (max-width: 768px) {
+        font-size: 0.75rem;
+      }
+    }
+  }
+  
+  .map-info {
+    padding: 1rem;
+    
+    @media (max-width: 768px) {
+      padding: 0.75rem;
+    }
+    
+    .info-item {
+      .info-title {
+        font-size: 0.875rem;
+        
+        @media (max-width: 768px) {
+          font-size: 0.75rem;
+        }
+      }
+      
+      .info-text {
+        font-size: 0.75rem;
+        
+        @media (max-width: 768px) {
+          font-size: 0.625rem;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .contact-page-container {
     .hero-section {
       padding: 2rem 0;
 
       h1 {
-        font-size: 2.5rem !important;
+        font-size: 2rem !important;
+      }
+      
+      p {
+        font-size: 1rem !important;
       }
     }
 
     .grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page-container {
+    .hero-section {
+      padding: 1.5rem 0;
+
+      h1 {
+        font-size: 1.75rem !important;
+      }
+      
+      p {
+        font-size: 0.875rem !important;
+      }
+      
+      .flex {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-offset: 2px;
+  border-color: #3b82f6;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important;
+}
+
+@media (prefers-contrast: high) {
+  .form-input,
+  .form-textarea {
+    border: 2px solid #000;
+    
+    &:focus {
+      border-color: #0066cc;
+    }
+  }
+  
+  .submit-button {
+    border: 2px solid #000;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::before {
+    animation: none;
+  }
+  
+  .submit-button {
+    transition: none;
+    
+    &:hover {
+      transform: none;
     }
   }
 }

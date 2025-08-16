@@ -15,7 +15,6 @@ import CheckoutForm from "./components/CheckoutForm";
 import Contact from "./components/Contact";
 import Slider from "./components/Slider";
 import {
-  NotificationProvider,
   NotificationContainer,
   useNotification,
 } from "./components/Notification";
@@ -27,7 +26,6 @@ function App() {
   const [Mode, setMode] = useState("light");
   const notification = useNotification();
 
-  // Chỉ hiển thị slider ở trang home
   const isHomePage = location.pathname === "/" && showSlide;
 
   const setDarkLight = () => {
@@ -49,8 +47,11 @@ function App() {
       <CartProvider>
         <Navbar toggleMode={setDarkLight} mode={Mode} />
 
-        {/* Slider chỉ hiển thị ở trang home */}
-        {isHomePage && <Slider mode={Mode} />}
+        {isHomePage && (
+          <div className="slider-container">
+            <Slider mode={Mode} />
+          </div>
+        )}
 
         <Routes>
           <Route

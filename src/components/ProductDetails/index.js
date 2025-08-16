@@ -1,5 +1,4 @@
-// src/components/ProductDetails/index.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { fetchApi } from "../../api/api";
@@ -39,11 +38,20 @@ function ProductDetails(props) {
     return item?.id !== products?.id;
   });
 
-  const handleResponseGetProductsSuggestion = (data) => {
+  const handleResponseGetProductsSuggestion = useCallback((data) => {
     setProductsSuggestion(data);
-  };
+  }, []);
 
-  const handleGetCategoryProducts = () => {
+  const handleResponseGetProductDetails = useCallback((data) => {
+    setProducts(data);
+    setLoading(false);
+  }, []);
+
+  const handleError = useCallback((data) => {
+    notification.error(data?.message || "Something went wrong!", 3000);
+  }, [notification]);
+
+  const handleGetCategoryProducts = useCallback(() => {
     fetchApi(
       "GET",
       "https://dummyjson.com",
@@ -51,18 +59,9 @@ function ProductDetails(props) {
       handleResponseGetProductsSuggestion,
       handleError
     );
-  };
+  }, [products?.category, handleResponseGetProductsSuggestion, handleError]);
 
-  const handleResponseGetProductDetails = (data) => {
-    setProducts(data);
-    setLoading(false);
-  };
-
-  const handleError = (data) => {
-    notification.error(data?.message || "Something went wrong!", 3000);
-  };
-
-  const handleGetProductDetails = () => {
+  const handleGetProductDetails = useCallback(() => {
     setLoading(true);
     fetchApi(
       "GET",
@@ -71,7 +70,7 @@ function ProductDetails(props) {
       handleResponseGetProductDetails,
       handleError
     );
-  };
+  }, [from, handleResponseGetProductDetails, handleError]);
 
   const notifySuccess = () => {
     addItem(products);
@@ -85,7 +84,9 @@ function ProductDetails(props) {
     notification.error("Vui lòng đăng nhập để tiếp tục!", 3000);
   };
 
-  const handleAddItem = () => {
+  const handleAddItem = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     token !== null ? notifySuccess() : notifyError();
   };
 
@@ -124,13 +125,13 @@ function ProductDetails(props) {
 
   useEffect(() => {
     handleGetProductDetails();
-  }, [from]);
+  }, [handleGetProductDetails]);
 
   useEffect(() => {
     if (products?.category) {
       handleGetCategoryProducts();
     }
-  }, [products?.category]);
+  }, [products?.category, handleGetCategoryProducts]);
 
   if (loading) {
     return (

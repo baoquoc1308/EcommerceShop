@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useCart } from "react-use-cart";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo from "../images/logo.png";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AvatarDropdown from "../Logout/index";
 import "./index.scss";
 
 function Navbar() {
-  const location = useLocation();
-  const { pathname } = location;
-  const splitLocation = pathname.split("/");
+
   const { totalUniqueItems } = useCart();
   const token = localStorage.getItem("accessToken");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +31,7 @@ function Navbar() {
     <nav className="navbar-container fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 z-[100]">
       <div className="navbar-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Left Side */}
+          
           <div className="flex-shrink-0 cursor-pointer" onClick={scrollToTop}>
             <img
               src={logo}
@@ -42,7 +40,7 @@ function Navbar() {
             />
           </div>
 
-          {/* Desktop Navigation - Center */}
+          
           <div className="hidden md:block flex-1">
             <div className="flex items-center justify-center space-x-8">
               {navItems.map((item) => (
@@ -72,9 +70,9 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Right side items - Cart & User */}
+          
           <div className="hidden md:flex items-center space-x-4">
-            {/* Cart */}
+            
             <NavLink
               to="/cart"
               className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 group"
@@ -90,7 +88,7 @@ function Navbar() {
               )}
             </NavLink>
 
-            {/* Auth */}
+            
             {!token ? (
               <NavLink
                 to="/login"
@@ -105,7 +103,7 @@ function Navbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -134,7 +132,7 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        
         <div
           className={`md:hidden transition-all duration-300 overflow-hidden ${
             isMenuOpen ? "max-h-96 pb-4" : "max-h-0"

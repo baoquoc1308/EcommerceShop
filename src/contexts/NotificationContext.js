@@ -34,7 +34,6 @@ export const NotificationProvider = ({ children }) => {
     setNotifications([]);
   };
 
-  // Các hàm tiện ích
   const success = (message, duration) =>
     addNotification(message, "success", duration);
   const error = (message, duration) =>

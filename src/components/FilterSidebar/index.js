@@ -90,9 +90,9 @@ const FilterSidebar = ({
         onClick={onMobileClose}
       />
 
-      <div
+<div
         className={`
-            fixed lg:sticky top-0 left-0 h-screen lg:h-auto
+            fixed lg:sticky top-0 left-0 h-screen lg:h-screen lg:max-h-screen
             w-80 bg-white border-r border-gray-200 overflow-y-auto z-50
             transform transition-all duration-500 ease-out
             ${
@@ -126,7 +126,6 @@ const FilterSidebar = ({
         </div>
 
         <div className="p-4 space-y-6">
-          {/* Sort Section */}
           <div>
             <button
               onClick={() => toggleSection("sort")}
@@ -177,7 +176,6 @@ const FilterSidebar = ({
             </div>
           </div>
 
-          {/* Categories Section */}
           <div>
             <button
               onClick={() => toggleSection("categories")}
@@ -227,7 +225,6 @@ const FilterSidebar = ({
             </div>
           </div>
 
-          {/* Price Range Section */}
           <div>
             <button
               onClick={() => toggleSection("priceRange")}

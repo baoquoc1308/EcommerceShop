@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { fetchApi } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import "../Login/index.scss";
@@ -74,7 +74,6 @@ function Login(props) {
             className="my-2 rounded-md w-full p-2 text-black"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* for registering */}
           <div className={`${display} w-full`}>
             <h3 className="my-2">Confirm Password</h3>
             <input

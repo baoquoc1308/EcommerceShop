@@ -16,7 +16,7 @@ const Cart = (props) => {
   props.myFun(false);
   props.myFun2(true);
 
-  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } =
+  const { isEmpty, items, updateItemQuantity, removeItem } =
     useCart();
   const [totalAllProduct, setTotalAllProduct] = useState(0);
   const [productToDelete, setProductToDelete] = useState(null);
@@ -31,9 +31,9 @@ const Cart = (props) => {
       notification.warning("Please select at least 1 product to pay!", 3000);
       return;
     }
-    let storedOrders = JSON.parse(localStorage.getItem("storedOrders")) || [];
-    storedOrders.push(selectedProducts);
-    localStorage.setItem("storedOrders", JSON.stringify(selectedProducts));
+    
+    localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+    
     setTimeout(() => {
       navigate("/checkoutform");
     }, 1000);

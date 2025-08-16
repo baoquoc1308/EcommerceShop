@@ -22,7 +22,6 @@ function Products(props) {
   const handleSortChange = useCallback((value) => {
     setSortOption(value);
   }, []);
-  // Memoized filtering and sorting logic
   const filteredProducts = useMemo(() => {
     if (!allProducts?.products?.length) {
       return { products: [] };
@@ -30,7 +29,6 @@ function Products(props) {
 
     let filtered = [...allProducts.products];
 
-    // Apply search filter
     if (searchKeyword.trim()) {
       const keyword = searchKeyword.toLowerCase().trim();
       filtered = filtered.filter(
@@ -42,14 +40,12 @@ function Products(props) {
       );
     }
 
-    // Apply category filters
     if (selectedCategories.length > 0) {
       filtered = filtered.filter((product) =>
         selectedCategories.includes(product.category)
       );
     }
 
-    // Apply price filters
     if (selectedPriceRanges.length > 0) {
       filtered = filtered.filter((product) => {
         const price = product.price;
@@ -74,7 +70,6 @@ function Products(props) {
       });
     }
 
-    // Apply sorting
     if (sortOption) {
       switch (sortOption) {
         case "lowToHigh":
@@ -106,7 +101,6 @@ function Products(props) {
     sortOption,
   ]);
 
-  // Memoized callbacks
   const handleResponseGetAllProducts = useCallback((data) => {
     if (!data || !data.products || !Array.isArray(data.products)) {
       console.error("Invalid data structure:", data);
@@ -181,13 +175,12 @@ function Products(props) {
     setSearchKeyword(e.target.value);
   }, []);
 
-  // Simplified debounced search effect
   useEffect(() => {
     fetchAllProducts();
   }, [fetchAllProducts]);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-8">
+    <div className="min-h-screen bg-gray-50 pt-4"> 
       <div className="flex">
         <FilterSidebar
           onCategoryFilter={handleCategoryFilter}
@@ -200,15 +193,11 @@ function Products(props) {
           isMobileOpen={isMobileFilterOpen}
           onMobileClose={() => setIsMobileFilterOpen(false)}
         />
-
-        {/* Main Content */}
         <div className="flex-1 lg:ml-0">
-          {/* Header - Removed Sort Section */}
           <div className="bg-white border-b border-gray-200 px-4 py-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  {/* Mobile Filter Button */}
                   <button
                     onClick={() => setIsMobileFilterOpen(true)}
                     className="lg:hidden flex items-center gap-2 px-4 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition-colors duration-200 border border-blue-200"
@@ -217,7 +206,6 @@ function Products(props) {
                     <span className="font-medium">Filters</span>
                   </button>
 
-                  {/* Title */}
                   <div>
                     <h1 className="text-2xl font-bold  text-amber-600 ">
                       FEATURED PRODUCTS
@@ -226,7 +214,6 @@ function Products(props) {
                 </div>
               </div>
 
-              {/* Search Input */}
               <div className="relative max-w-lg">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
@@ -240,7 +227,6 @@ function Products(props) {
                 />
               </div>
 
-              {/* Active Filters */}
               {(selectedCategories.length > 0 ||
                 selectedPriceRanges.length > 0 ||
                 searchKeyword.trim() ||
@@ -315,14 +301,13 @@ function Products(props) {
             </div>
           </div>
 
-          {/* Products Grid */}
           <div className="p-6">
             {loading ? (
               <div className="flex justify-center items-center py-20">
                 <Spinner />
               </div>
             ) : filteredProducts?.products?.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                 {filteredProducts.products.map((element) => (
                   <ProductItems
                     key={element.id}

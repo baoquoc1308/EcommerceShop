@@ -11,7 +11,7 @@ import {
   MapPin,
   Clock,
   Send,
-  CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 
 export const Contact = (props) => {
@@ -37,7 +37,6 @@ export const Contact = (props) => {
   const form = useRef();
   const navigate = useNavigate();
 
-  // Initialize EmailJS
   useEffect(() => {
     emailjs.init("9v1RiOXzBjvQ_2cDp");
   }, []);
@@ -47,7 +46,7 @@ export const Contact = (props) => {
 
     if (!validateForm()) {
       notification.error(
-        "Please fill in all information and enter the correct email format.",
+        "Please fill in all required fields with valid information.",
         3000
       );
       return;
@@ -56,13 +55,12 @@ export const Contact = (props) => {
     setIsSubmitting(true);
 
     try {
-      // Create form data for emailjs
       const templateParams = {
         user_name: formData.user_name,
         user_email: formData.user_email,
         user_phone: formData.user_phone,
         message: formData.message,
-        to_name: "Support Team", // Optional
+        to_name: "Support Team",
       };
 
       const result = await emailjs.send(
@@ -79,7 +77,6 @@ export const Contact = (props) => {
         3000
       );
 
-      // Reset form
       setFormData({
         user_name: "",
         user_email: "",
@@ -94,7 +91,6 @@ export const Contact = (props) => {
         message: false,
       });
 
-      // Navigate after delay
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -127,7 +123,7 @@ export const Contact = (props) => {
   };
 
   const isValidPhoneNumber = (phoneNumber) => {
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^(\+84|84|0)[3|5|7|8|9][0-9]{8}$/;
     return phoneRegex.test(phoneNumber);
   };
 
@@ -139,7 +135,6 @@ export const Contact = (props) => {
       [name]: value,
     });
 
-    // Real-time validation
     if (name === "user_email") {
       setFormErrors({
         ...formErrors,
@@ -163,50 +158,49 @@ export const Contact = (props) => {
 
   return (
     <div className="contact-page-container min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pt-20">
-      {/* Hero Section */}
-      <div className="hero-section bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white py-16 mb-12">
+      
+      <div className="hero-section bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white py-12 mb-4">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Get In Touch</h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-6">
-            We'd love to hear from you. Send us a message and we'll respond as
-            soon as possible.
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Get In Touch</h1>
+          <p className="text-lg md:text-xl opacity-90 mb-4">
+            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </p>
-          <div className="flex items-center justify-center space-x-8 text-sm">
+          <div className="flex items-center justify-center space-x-6 text-sm">
             <div className="flex items-center">
-              <Clock className="w-5 h-5 mr-2" />
+              <Clock className="w-4 h-4 mr-2" />
               <span>24/7 Support</span>
             </div>
             <div className="flex items-center">
-              <MapPin className="w-5 h-5 mr-2" />
+              <MapPin className="w-4 h-4 mr-2" />
               <span>Vietnam Location</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Form */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">
+      <div className="max-w-6xl mx-auto px-4 pb-12">
+        <div className="contact-content-grid grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          
+          <div className="contact-form-container bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 Send Message
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 Fill out the form below and we'll get back to you shortly.
               </p>
             </div>
 
-            <form ref={form} onSubmit={sendEmail} className="space-y-6">
-              {/* Name Field */}
+            <form ref={form} onSubmit={sendEmail} className="contact-form space-y-4 flex-1">
+              
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Họ và tên *
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <User
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 ${
                         formErrors.user_name ? "text-red-400" : "text-gray-400"
                       }`}
                     />
@@ -214,10 +208,10 @@ export const Contact = (props) => {
                   <input
                     type="text"
                     name="user_name"
-                    placeholder="Nhập tên đầy đủ..."
+                    placeholder="Enter your full name"
                     value={formData.user_name}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                    className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-sm ${
                       formErrors.user_name
                         ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                         : "border-gray-300"
@@ -226,22 +220,22 @@ export const Contact = (props) => {
                   />
                 </div>
                 {formErrors.user_name && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center">
-                    <span className="w-4 h-4 mr-1">⚠️</span>
-                    Vui lòng nhập họ và tên.
+                  <p className="mt-1 text-xs text-red-600 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
+                    Please enter your full name.
                   </p>
                 )}
               </div>
 
-              {/* Email Field */}
+              
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email *
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email Address *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 ${
                         formErrors.user_email ? "text-red-400" : "text-gray-400"
                       }`}
                     />
@@ -249,10 +243,10 @@ export const Contact = (props) => {
                   <input
                     type="email"
                     name="user_email"
-                    placeholder="Nhập email..."
+                    placeholder="your.email@example.com"
                     value={formData.user_email}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                    className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-sm ${
                       formErrors.user_email
                         ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                         : "border-gray-300"
@@ -261,22 +255,22 @@ export const Contact = (props) => {
                   />
                 </div>
                 {formErrors.user_email && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center">
-                    <span className="w-4 h-4 mr-1">⚠️</span>
-                    Vui lòng nhập định dạng email hợp lệ.
+                  <p className="mt-1 text-xs text-red-600 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
+                    Please enter a valid email address.
                   </p>
                 )}
               </div>
 
-              {/* Phone Field */}
+              
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Số điện thoại *
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Phone
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 ${
                         formErrors.user_phone ? "text-red-400" : "text-gray-400"
                       }`}
                     />
@@ -284,10 +278,10 @@ export const Contact = (props) => {
                   <input
                     type="tel"
                     name="user_phone"
-                    placeholder="Nhập số điện thoại..."
+                    placeholder="+84 xxx xxx xxx"
                     value={formData.user_phone}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                    className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-sm ${
                       formErrors.user_phone
                         ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                         : "border-gray-300"
@@ -296,33 +290,33 @@ export const Contact = (props) => {
                   />
                 </div>
                 {formErrors.user_phone && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center">
-                    <span className="w-4 h-4 mr-1">⚠️</span>
-                    Vui lòng nhập số điện thoại hợp lệ.
+                  <p className="mt-1 text-xs text-red-600 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
+                    Please enter a valid Vietnamese phone number.
                   </p>
                 )}
               </div>
 
-              {/* Message Field */}
+              
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Nội dung *
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Message *
                 </label>
                 <div className="relative">
                   <div className="absolute top-3 left-3 flex items-start pointer-events-none">
                     <MessageSquare
-                      className={`h-5 w-5 ${
+                      className={`h-4 w-4 ${
                         formErrors.message ? "text-red-400" : "text-gray-400"
                       }`}
                     />
                   </div>
                   <textarea
                     name="message"
-                    rows="4"
-                    placeholder="Nhập nội dung tin nhắn..."
+                    rows="3"
+                    placeholder="Enter your message here..."
                     value={formData.message}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none ${
+                    className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none text-sm ${
                       formErrors.message
                         ? "border-red-300 focus:ring-red-500 focus:border-red-500"
                         : "border-gray-300"
@@ -331,29 +325,29 @@ export const Contact = (props) => {
                   />
                 </div>
                 {formErrors.message && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center">
-                    <span className="w-4 h-4 mr-1">⚠️</span>
-                    Vui lòng nhập nội dung.
+                  <p className="mt-1 text-xs text-red-600 flex items-center">
+                    <AlertCircle className="w-3 h-3 mr-1" />
+                    Please enter your message.
                   </p>
                 )}
               </div>
 
-              {/* Submit Button */}
+              
               <button
                 type="submit"
                 disabled={
                   Object.values(formErrors).some(Boolean) || isSubmitting
                 }
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2.5 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-md text-sm"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                     <span>Sending...</span>
                   </>
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
+                    <Send className="w-4 h-4" />
                     <span>Send Message</span>
                   </>
                 )}
@@ -361,15 +355,15 @@ export const Contact = (props) => {
             </form>
           </div>
 
-          {/* Map */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-            <div className="p-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-              <h3 className="text-2xl font-bold mb-2">Visit Our Store</h3>
-              <p className="opacity-90">
+          
+          <div className="map-container-wrapper bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div className="map-header p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+              <h3 className="text-xl font-bold mb-1">Visit Our Store</h3>
+              <p className="opacity-90 text-sm">
                 Find us at our location in Ho Chi Minh City
               </p>
             </div>
-            <div className="h-96">
+            <div className="map-iframe-container">
               <iframe
                 title="Google Map"
                 width="100%"
@@ -381,22 +375,22 @@ export const Contact = (props) => {
                 className="w-full h-full"
               />
             </div>
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-blue-500" />
+            <div className="map-info p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="info-item flex items-center space-x-2">
+                  <MapPin className="w-4 h-4 text-blue-500" />
                   <div>
-                    <p className="font-medium text-gray-800">Address</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="info-title font-medium text-gray-800 text-sm">Address</p>
+                    <p className="info-text text-xs text-gray-600">
                       Ho Chi Minh City, Vietnam
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Clock className="w-5 h-5 text-green-500" />
+                <div className="info-item flex items-center space-x-2">
+                  <Clock className="w-4 h-4 text-green-500" />
                   <div>
-                    <p className="font-medium text-gray-800">Hours</p>
-                    <p className="text-sm text-gray-600">24/7 Online Support</p>
+                    <p className="info-title font-medium text-gray-800 text-sm">Hours</p>
+                    <p className="info-text text-xs text-gray-600">24/7 Online Support</p>
                   </div>
                 </div>
               </div>
