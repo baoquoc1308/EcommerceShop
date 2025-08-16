@@ -47,7 +47,6 @@ function BlogPost(props) {
     setLoading(false);
   }, [slug]);
 
-  // Reading progress tracking
   useEffect(() => {
     const updateReadingProgress = () => {
       const article = document.querySelector(".blog-content");

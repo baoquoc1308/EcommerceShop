@@ -11,7 +11,6 @@ function Navbar() {
   const { totalUniqueItems } = useCart();
   const token = localStorage.getItem("accessToken");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -89,6 +88,7 @@ function Navbar() {
             </NavLink>
 
             
+
             {!token ? (
               <NavLink
                 to="/login"

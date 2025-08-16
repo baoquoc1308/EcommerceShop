@@ -18,6 +18,9 @@ import {
   NotificationContainer,
   useNotification,
 } from "./components/Notification";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermsOfService";
+import CookiePolicy from "./components/CookiePolicy";
 
 function App() {
   const location = useLocation();
@@ -143,7 +146,38 @@ function App() {
               />
             }
           />
+          <Route
+  path="/privacy"
+  element={
+    <PrivacyPolicy
+      mode={Mode}
+      myFun={setshowSlide}
+      myFun2={setshowFooter}
+    />
+  }
+/>
+<Route
+  path="/terms"
+  element={
+    <TermsOfService
+      mode={Mode}
+      myFun={setshowSlide}
+      myFun2={setshowFooter}
+    />
+  }
+/>
+<Route
+  path="/cookies"
+  element={
+    <CookiePolicy
+      mode={Mode}
+      myFun={setshowSlide}
+      myFun2={setshowFooter}
+    />
+  }
+/>
         </Routes>
+
       </CartProvider>
       {showFooter && <Footer mode={Mode} />}
     </>

@@ -50,7 +50,6 @@ function Blog(props) {
     Lifestyle: "bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border-green-200",
   });
 
-  // Filter posts based on search and category
   React.useEffect(() => {
     let filtered = [...blogPostsData];
 
@@ -82,7 +81,6 @@ function Blog(props) {
       .slice(0, 3);
   };
 
-  // Safe category color getter
   const getCategoryColor = (category, colorType = 'badge') => {
     const colors = colorType === 'badge' ? categoryBadgeColors : categoryColors;
     return colors[category] || (colorType === 'badge' 
@@ -93,7 +91,6 @@ function Blog(props) {
 
   return (
     <div className="blog-container">
-      {/* Animated Hero Section */}
       <div className="hero-section">
         <div className="hero-background">
           <div className="hero-gradient"></div>
@@ -139,7 +136,6 @@ function Blog(props) {
       </div>
 
       <div className="blog-main-content">
-        {/* Enhanced Search and Filter Section */}
         <div className="search-filter-section">
           <div className="search-filter-container">
             <div className="search-section">
@@ -184,7 +180,6 @@ function Blog(props) {
             </div>
           </div>
 
-          {/* Results Summary */}
           {(searchTerm || selectedCategory !== "All") && (
             <div className="results-summary">
               {filteredPosts.length === 0 ? (
@@ -192,20 +187,13 @@ function Blog(props) {
                   <span className="no-results-text">No articles found matching your criteria.</span>
                 </div>
               ) : (
-                <div className="results-count">
-                  <span className="results-number">{filteredPosts.length}</span>
-                  <span className="results-text">
-                    {filteredPosts.length === 1 ? ' article found' : ' articles found'}
-                  </span>
-                  {searchTerm && <span className="search-term">for "{searchTerm}"</span>}
-                  {selectedCategory !== "All" && <span className="category-term">in {selectedCategory}</span>}
+                <div className="results-count"> 
                 </div>
               )}
             </div>
           )}
         </div>
 
-        {/* Enhanced Featured Article */}
         {filteredPosts.length > 0 && (
           <div className="featured-section">
             <div className="section-header">
@@ -292,7 +280,6 @@ function Blog(props) {
           </div>
         )}
 
-        {/* Enhanced Articles Grid */}
         {filteredPosts.length > 1 && (
           <div className="articles-section">
             <div className="section-header">
@@ -379,7 +366,6 @@ function Blog(props) {
           </div>
         )}
 
-        {/* No Results State */}
         {filteredPosts.length === 0 && (
           <div className="no-results-section">
             <div className="no-results-container">
@@ -406,7 +392,6 @@ function Blog(props) {
           </div>
         )}
 
-        {/* Enhanced Trending Section */}
         <div className="trending-section">
           <div className="section-header">
             <h2 className="section-title">

@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  LogoutOutlined,
-  QuestionCircleTwoTone,
-  UserOutlined,
-} from "@ant-design/icons";
+  LogOut,
+  AlertCircle,
+  X,
+} from "lucide-react";
 import { Avatar, Dropdown, Modal } from "antd";
 import "./index.scss";
 import { useNotification } from "../Notification";
+
 const AvatarDropdown = () => {
   const [isConfirmLogout, setIsConfirmLogout] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const notification = useNotification();
   const accessToken = localStorage.getItem("accessToken");
   const dataUser = localStorage.getItem("dataUser");
@@ -33,73 +35,121 @@ const AvatarDropdown = () => {
     }, 1000);
   };
 
-  const handleToggleConfirmLogout = () => {
-    setIsConfirmLogout((prev) => !prev);
+  const handleToggleConfirmLogout = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setIsConfirmLogout(true);
   };
 
   const handleCancel = () => {
     setIsConfirmLogout(false);
+    setDropdownVisible(false);
+  };
+
+  const handleConfirmLogout = () => {
+    setDropdownVisible(false);
+    handleResponseLogout();
+  };
+
+  const handleDropdownVisibleChange = (visible) => {
+    if (!isConfirmLogout) {
+      setDropdownVisible(visible);
+    }
   };
 
   return (
     <>
       <Dropdown
         overlay={
-          <div class="user-menu-wrap">
-            <div class="menu-container">
-              <ul class="user-menu">
-                <div class="profile-highlight">
-                  <div class="details">
-                    <div id="profile-name">{username}</div>
-                    <div id="profile-footer">{roleName}</div>
-                  </div>
+          <div className="modern-user-menu-wrap">
+            <div className="modern-menu-container">
+              <div className="modern-profile-section">
+                <div className="modern-avatar">
+                  <img
+                    src={
+                      user?.image ||
+                      "https://cdn-icons-png.flaticon.com/512/431/431985.png"
+                    }
+                    alt="profile-img"
+                  />
                 </div>
-                <li class="user-menu__item">
-                  <a class="user-menu-link" onClick={handleToggleConfirmLogout}>
-                    <LogoutOutlined
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        marginTop: " 0.5rem",
-                      }}
-                    />
-                    <div>Logout</div>
-                  </a>
-                </li>
-              </ul>
+                <div className="modern-profile-info">
+                  <div className="modern-profile-name">{username}</div>
+                  <div className="modern-profile-email">{roleName}</div>
+                </div>
+              </div>
+              <div className="modern-menu-divider"></div>
+              <div 
+                className="modern-menu-item" 
+                onClick={handleToggleConfirmLogout}
+              >
+                <LogOut size={18} className="modern-menu-icon" />
+                <span className="modern-menu-text">Logout</span>
+              </div>
             </div>
           </div>
         }
         trigger={["click"]}
+        placement="bottomRight"
+        overlayClassName="modern-dropdown-overlay"
+        open={dropdownVisible}
+        onOpenChange={handleDropdownVisibleChange}
       >
-        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-          <>
-            <Avatar
-              icon={
-                <img
-                  src={
-                    user?.image ||
-                    "https://cdn-icons-png.flaticon.com/512/431/431985.png"
-                  }
-                  alt="profile-img"
-                  width="36px"
-                  height="36px"
-                />
-              }
-            />
-            <span>{username}</span>
-          </>
-        </a>
+        <div className="modern-avatar-trigger">
+          <Avatar
+            size={40}
+            src={
+              user?.image ||
+              "https://cdn-icons-png.flaticon.com/512/431/431985.png"
+            }
+            className="modern-avatar-img"
+          />
+          <span className="modern-username">{username}</span>
+        </div>
       </Dropdown>
+
       <Modal
-        title="Confirmation"
-        onCancel={handleCancel}
+        title={null}
+        footer={null}
         open={isConfirmLogout}
-        onOk={handleResponseLogout}
+        onCancel={handleCancel}
+        centered
+        width={420}
+        className="modern-logout-modal"
+        maskStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+        closeIcon={
+          <div className="modern-close-btn">
+            <X size={20} />
+          </div>
+        }
+        zIndex={2000}
       >
-        <div className="modal-logout">
-          <QuestionCircleTwoTone className="modal-logout__icon" />
-          <p className="modal-logout__msg">Do you want to logout?</p>
+        <div className="modern-modal-content">
+          <div className="modern-modal-icon">
+            <AlertCircle size={48} />
+          </div>
+          <div className="modern-modal-text">
+            <h3 className="modern-modal-title">Confirm Logout</h3>
+            <p className="modern-modal-message">
+              Are you sure you want to logout? You'll need to sign in again to access your account.
+            </p>
+          </div>
+          <div className="modern-modal-actions">
+            <button 
+              className="modern-btn modern-btn-cancel" 
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+            <button 
+              className="modern-btn modern-btn-confirm" 
+              onClick={handleConfirmLogout}
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+          </div>
         </div>
       </Modal>
     </>
