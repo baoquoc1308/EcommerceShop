@@ -16,12 +16,13 @@
 .hero-background {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.9) 0%, 
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.9) 0%,
     rgba(118, 75, 162, 0.9) 50%,
     rgba(255, 154, 158, 0.8) 100%
   );
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -34,8 +35,16 @@
 .hero-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
 }
 
 .floating-elements {
@@ -50,7 +59,7 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   animation: float 6s ease-in-out infinite;
-  
+
   &.circle-1 {
     width: 80px;
     height: 80px;
@@ -58,7 +67,7 @@
     left: 10%;
     animation-delay: 0s;
   }
-  
+
   &.circle-2 {
     width: 120px;
     height: 120px;
@@ -66,7 +75,7 @@
     right: 15%;
     animation-delay: 2s;
   }
-  
+
   &.circle-3 {
     width: 60px;
     height: 60px;
@@ -74,7 +83,7 @@
     left: 20%;
     animation-delay: 4s;
   }
-  
+
   &.circle-4 {
     width: 100px;
     height: 100px;
@@ -114,15 +123,13 @@
   line-height: 1.1;
   margin-bottom: 1.5rem;
   animation: fadeInUp 1s ease-out 0.4s both;
-  
+
   .hero-title-highlight {
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
-    
-  
   }
 }
 
@@ -157,7 +164,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 500;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.25);
@@ -218,11 +225,11 @@
   background: #f8fafc;
   font-size: 1rem;
   transition: all 0.3s ease;
-  
+
   &::placeholder {
     color: #9ca3af;
   }
-  
+
   &:focus {
     outline: none;
     border-color: #667eea;
@@ -245,7 +252,7 @@
   color: #6b7280;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: #d1d5db;
     transform: translateY(-50%) scale(1.1);
@@ -283,32 +290,32 @@
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
-  
+
   &.active {
     color: white;
     border-color: transparent;
-    
+
     &.all {
       background: linear-gradient(135deg, #4b5563, #374151);
     }
-    
+
     &.fashion {
       background: linear-gradient(135deg, #ec4899, #f43f5e);
     }
-    
+
     &.beauty {
       background: linear-gradient(135deg, #a855f7, #ec4899);
     }
-    
+
     &.technology {
       background: linear-gradient(135deg, #3b82f6, #06b6d4);
     }
-    
+
     &.lifestyle {
       background: linear-gradient(135deg, #10b981, #059669);
     }
@@ -333,14 +340,15 @@
 
 .results-count {
   color: #4b5563;
-  
+
   .results-number {
     font-weight: 700;
     color: #667eea;
     font-size: 1.25rem;
   }
-  
-  .search-term, .category-term {
+
+  .search-term,
+  .category-term {
     font-weight: 600;
     color: #667eea;
   }
@@ -400,7 +408,7 @@
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  
+
   &:hover {
     transform: translateY(-10px);
     box-shadow: 0 35px 100px rgba(0, 0, 0, 0.15);
@@ -418,7 +426,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease;
-  
+
   .featured-card:hover & {
     transform: scale(1.1);
   }
@@ -510,7 +518,7 @@
   color: #1f2937;
   margin-bottom: 1.5rem;
   transition: color 0.3s ease;
-  
+
   .featured-card:hover & {
     color: #667eea;
   }
@@ -548,7 +556,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: #e5e7eb;
     transform: translateY(-2px);
@@ -565,7 +573,7 @@
   border-radius: 50px;
   font-weight: 600;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateX(5px);
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
@@ -598,7 +606,7 @@
   transition: all 0.4s ease;
   border: 1px solid #f1f5f9;
   animation: fadeInUp 0.6s ease-out both;
-  
+
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
@@ -616,7 +624,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
-  
+
   .article-card:hover & {
     transform: scale(1.08);
   }
@@ -625,10 +633,14 @@
 .article-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
-  
+
   .article-card:hover & {
     opacity: 1;
   }
@@ -675,7 +687,7 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  
+
   .article-card:hover & {
     color: #667eea;
   }
@@ -791,7 +803,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
@@ -826,7 +838,7 @@
   transition: all 0.3s ease;
   border: 1px solid #f1f5f9;
   animation: slideInLeft 0.6s ease-out both;
-  
+
   &:hover {
     transform: translateX(10px);
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
@@ -872,7 +884,7 @@
   margin-bottom: 0.5rem;
   line-height: 1.4;
   transition: color 0.3s ease;
-  
+
   .trending-card:hover & {
     color: #667eea;
   }
@@ -890,7 +902,7 @@
   flex-shrink: 0;
   color: #9ca3af;
   transition: all 0.3s ease;
-  
+
   .trending-card:hover & {
     color: #667eea;
     transform: translateX(5px);
@@ -931,7 +943,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   33% {
@@ -961,7 +974,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
@@ -981,51 +995,51 @@
   .hero-title {
     font-size: clamp(2rem, 6vw, 3rem);
   }
-  
+
   .hero-description {
     font-size: 1rem;
   }
-  
+
   .hero-stats {
     gap: 1rem;
   }
-  
+
   .stat-item {
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
   }
-  
+
   .search-filter-container {
     padding: 1.5rem;
   }
-  
+
   .category-filters {
     gap: 0.5rem;
   }
-  
+
   .category-btn {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
-  
+
   .featured-content {
     padding: 1.5rem;
   }
-  
+
   .featured-title {
     font-size: 1.5rem;
   }
-  
+
   .articles-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .trending-card {
     padding: 1rem;
     gap: 1rem;
   }
-  
+
   .trending-title {
     font-size: 1rem;
   }
@@ -1035,30 +1049,30 @@
   .hero-content {
     padding: 0 1rem;
   }
-  
+
   .blog-main-content {
     padding: 2rem 0;
   }
-  
+
   .search-filter-section,
   .featured-section,
   .articles-section,
   .trending-section {
     padding: 0 1rem;
   }
-  
+
   .search-filter-container {
     padding: 1rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .featured-meta {
     gap: 1rem;
   }
-  
+
   .featured-footer {
     flex-direction: column;
     align-items: flex-start;

@@ -34,7 +34,7 @@ function Blog(props) {
       }
     });
     return ["All", ...Array.from(uniqueCategories)];
-  }, []);
+  }, [])
 
   const categoryColors = Object.freeze({
     Fashion: "from-pink-500 to-rose-500",
