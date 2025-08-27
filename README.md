@@ -45,7 +45,7 @@ You can access the live application here:
 
 ## 🔑 Demo Accounts
 - **API: https://dummyjson.com/**  
-  Email: `"emily`  
-  Password: `emilypass`
+  Email (UserName): `emilys`  
+  Password: `emilyspass`
 
 
